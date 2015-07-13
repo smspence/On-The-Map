@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  OnTheMap
 //
 //  Created by Shawn Spencer on 7/11/15.
@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
+
+    @IBOutlet weak var textFieldEmail: UITextField!
+    @IBOutlet weak var textFieldPassword: UITextField!
+    @IBOutlet weak var errorMessageLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +24,9 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func loginButtonTapped(sender: AnyObject) {
+        println("In loginButtonTapped")
+    }
 
 }
 
