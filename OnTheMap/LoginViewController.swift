@@ -25,7 +25,44 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginButtonTapped(sender: AnyObject) {
-        println("In loginButtonTapped")
+
+        if count(textFieldEmail.text) == 0 {
+            self.errorMessageLabel.text = "Please enter email address."
+            return
+        } else if count(textFieldPassword.text) == 0 {
+            self.errorMessageLabel.text = "Please enter password."
+            return
+        } else {
+            self.errorMessageLabel.text = ""
+        }
+
+        OTMClient.sharedInstance().authenticateWithUsername(textFieldEmail.text, password: textFieldPassword.text) { (success, errorString) in
+            if success {
+                self.completeLogin()
+            } else {
+                self.displayError(errorString)
+            }
+        }
+    }
+
+    func completeLogin() {
+        dispatch_async(dispatch_get_main_queue(), {
+            self.errorMessageLabel.text = ""
+//            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ManagerNavigationController") as! UINavigationController
+//            self.presentViewController(controller, animated: true, completion: nil)
+
+            self.errorMessageLabel.text = "Login successful :)" // TODO - remove
+            println("userId: \(OTMClient.sharedInstance().userID)")
+            println("sessionId: \(OTMClient.sharedInstance().sessionID)")
+        })
+    }
+
+    func displayError(errorString: String?) {
+        dispatch_async(dispatch_get_main_queue(), {
+            if let errorString = errorString {
+                self.errorMessageLabel.text = errorString
+            }
+        })
     }
 
 }
