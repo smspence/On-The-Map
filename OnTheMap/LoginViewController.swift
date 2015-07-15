@@ -36,7 +36,7 @@ class LoginViewController: UIViewController {
             self.errorMessageLabel.text = ""
         }
 
-        OTMClient.sharedInstance().authenticateWithUsername(textFieldEmail.text, password: textFieldPassword.text) { (success, errorString) in
+        UdacityClient.sharedInstance().authenticateWithUsername(textFieldEmail.text, password: textFieldPassword.text) { (success, errorString) in
             if success {
                 self.completeLogin()
             } else {
@@ -48,9 +48,8 @@ class LoginViewController: UIViewController {
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
 
-            self.errorMessageLabel.text = "Login successful :)" // TODO - remove
-            println("userId: \(OTMClient.sharedInstance().userID)")
-            println("sessionId: \(OTMClient.sharedInstance().sessionID)")
+            println("userId: \(UdacityClient.sharedInstance().userID)")
+            println("sessionId: \(UdacityClient.sharedInstance().sessionID)")
 
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
             self.presentViewController(controller, animated: true, completion: nil)

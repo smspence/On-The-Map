@@ -1,5 +1,5 @@
 //
-//  OTMClient.swift
+//  UdacityClient.swift
 //  OnTheMap
 //
 //  Created by Shawn Spencer on 7/12/15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class OTMClient : NSObject {
+class UdacityClient : NSObject {
 
     /* Shared session */
     var session: NSURLSession
@@ -28,7 +28,7 @@ class OTMClient : NSObject {
 
         /* 1. Set the parameters */
         /* 2/3. Build the URL and configure the request */
-        let urlString = Constants.BaseURLSecure + method + OTMClient.escapedParameters(parameters)
+        let urlString = Constants.BaseURLSecure + method + UdacityClient.escapedParameters(parameters)
         let url = NSURL(string: urlString)!
         let request = NSURLRequest(URL: url)
 
@@ -39,7 +39,7 @@ class OTMClient : NSObject {
             if let error = downloadError {
                 completionHandler(result: nil, error: downloadError)
             } else {
-                OTMClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+                UdacityClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
             }
         }
 
@@ -55,7 +55,7 @@ class OTMClient : NSObject {
 
         /* 1. Set the parameters */
         /* 2/3. Build the URL and configure the request */
-        let urlString = Constants.BaseURLSecure + method + OTMClient.escapedParameters(parameters)
+        let urlString = Constants.BaseURLSecure + method + UdacityClient.escapedParameters(parameters)
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
         var jsonifyError: NSError? = nil
@@ -71,7 +71,7 @@ class OTMClient : NSObject {
             if let error = downloadError {
                 completionHandler(result: nil, error: downloadError)
             } else {
-                OTMClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+                UdacityClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
             }
         }
 
@@ -137,10 +137,10 @@ class OTMClient : NSObject {
 
     // MARK: - Shared Instance
 
-    class func sharedInstance() -> OTMClient {
+    class func sharedInstance() -> UdacityClient {
 
         struct Singleton {
-            static var sharedInstance = OTMClient()
+            static var sharedInstance = UdacityClient()
         }
 
         return Singleton.sharedInstance

@@ -1,12 +1,12 @@
 //
-//  OTMConstants.swift
+//  UdacityConstants.swift
 //  OnTheMap
 //
 //  Created by Shawn Spencer on 7/12/15.
 //  Copyright (c) 2015 Shawn Spencer. All rights reserved.
 //
 
-extension OTMClient {
+extension UdacityClient {
 
     // MARK: - Constants
     struct Constants {

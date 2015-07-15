@@ -17,9 +17,9 @@
 		A6C395E21B51B7A6001F7806 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6C395E11B51B7A6001F7806 /* Images.xcassets */; };
 		A6C395E51B51B7A6001F7806 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C395E31B51B7A6001F7806 /* LaunchScreen.xib */; };
 		A6C395F11B51B7A6001F7806 /* OnTheMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C395F01B51B7A6001F7806 /* OnTheMapTests.swift */; };
-		A6C395FE1B536204001F7806 /* OTMClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C395FD1B536204001F7806 /* OTMClient.swift */; };
-		A6C396001B5363B4001F7806 /* OTMConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C395FF1B5363B4001F7806 /* OTMConstants.swift */; };
-		A6C396021B554EA3001F7806 /* OTMConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C396011B554EA3001F7806 /* OTMConvenience.swift */; };
+		A6C395FE1B536204001F7806 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C395FD1B536204001F7806 /* UdacityClient.swift */; };
+		A6C396001B5363B4001F7806 /* UdacityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C395FF1B5363B4001F7806 /* UdacityConstants.swift */; };
+		A6C396021B554EA3001F7806 /* UdacityConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C396011B554EA3001F7806 /* UdacityConvenience.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,9 +47,9 @@
 		A6C395EA1B51B7A6001F7806 /* OnTheMapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnTheMapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6C395EF1B51B7A6001F7806 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6C395F01B51B7A6001F7806 /* OnTheMapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTheMapTests.swift; sourceTree = "<group>"; };
-		A6C395FD1B536204001F7806 /* OTMClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMClient.swift; sourceTree = "<group>"; };
-		A6C395FF1B5363B4001F7806 /* OTMConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMConstants.swift; sourceTree = "<group>"; };
-		A6C396011B554EA3001F7806 /* OTMConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTMConvenience.swift; sourceTree = "<group>"; };
+		A6C395FD1B536204001F7806 /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
+		A6C395FF1B5363B4001F7806 /* UdacityConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConstants.swift; sourceTree = "<group>"; };
+		A6C396011B554EA3001F7806 /* UdacityConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConvenience.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,19 +150,19 @@
 			isa = PBXGroup;
 			children = (
 				A65726971B56146C00B87D2E /* Parse */,
-				A6C395FC1B53612C001F7806 /* OTM */,
+				A6C395FC1B53612C001F7806 /* Udacity */,
 			);
 			name = Clients;
 			sourceTree = "<group>";
 		};
-		A6C395FC1B53612C001F7806 /* OTM */ = {
+		A6C395FC1B53612C001F7806 /* Udacity */ = {
 			isa = PBXGroup;
 			children = (
-				A6C395FD1B536204001F7806 /* OTMClient.swift */,
-				A6C395FF1B5363B4001F7806 /* OTMConstants.swift */,
-				A6C396011B554EA3001F7806 /* OTMConvenience.swift */,
+				A6C395FD1B536204001F7806 /* UdacityClient.swift */,
+				A6C395FF1B5363B4001F7806 /* UdacityConstants.swift */,
+				A6C396011B554EA3001F7806 /* UdacityConvenience.swift */,
 			);
-			name = OTM;
+			name = Udacity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,12 +266,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A657269B1B56151000B87D2E /* ParseClient.swift in Sources */,
-				A6C396021B554EA3001F7806 /* OTMConvenience.swift in Sources */,
+				A6C396021B554EA3001F7806 /* UdacityConvenience.swift in Sources */,
 				A65726961B55F00300B87D2E /* TableViewController.swift in Sources */,
 				A65726941B55EFCB00B87D2E /* MapViewController.swift in Sources */,
 				A6C395DD1B51B7A6001F7806 /* LoginViewController.swift in Sources */,
-				A6C395FE1B536204001F7806 /* OTMClient.swift in Sources */,
-				A6C396001B5363B4001F7806 /* OTMConstants.swift in Sources */,
+				A6C395FE1B536204001F7806 /* UdacityClient.swift in Sources */,
+				A6C396001B5363B4001F7806 /* UdacityConstants.swift in Sources */,
 				A6C395DB1B51B7A6001F7806 /* AppDelegate.swift in Sources */,
 				A65726991B5614C300B87D2E /* ParseConstants.swift in Sources */,
 			);

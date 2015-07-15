@@ -1,5 +1,5 @@
 //
-//  OTMConvenience.swift
+//  UdacityConvenience.swift
 //  OnTheMap
 //
 //  Created by Shawn Spencer on 7/14/15.
@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-extension OTMClient {
+extension UdacityClient {
 
     // MARK: - Authentication (GET) Methods
     /*
