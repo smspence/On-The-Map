@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -135,16 +136,16 @@
                                 <exclude reference="KM6-R8-MSN"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="9q5-b2-cPk"/>
-                                <exclude reference="Bxj-fg-bOg"/>
                                 <exclude reference="YP1-GQ-XQq"/>
                                 <exclude reference="xDj-Oc-bi6"/>
                                 <exclude reference="RdN-yy-y5i"/>
                                 <exclude reference="xZf-Gi-OFs"/>
-                                <exclude reference="oY3-P2-Oou"/>
-                                <exclude reference="tfw-H3-iCh"/>
                                 <exclude reference="0S9-iU-AIO"/>
                                 <exclude reference="zKj-Rl-Siv"/>
+                                <exclude reference="9q5-b2-cPk"/>
+                                <exclude reference="Bxj-fg-bOg"/>
+                                <exclude reference="oY3-P2-Oou"/>
+                                <exclude reference="tfw-H3-iCh"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -156,16 +157,16 @@
                                 <include reference="KM6-R8-MSN"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="9q5-b2-cPk"/>
-                                <include reference="Bxj-fg-bOg"/>
                                 <include reference="YP1-GQ-XQq"/>
                                 <include reference="xDj-Oc-bi6"/>
                                 <include reference="RdN-yy-y5i"/>
                                 <include reference="xZf-Gi-OFs"/>
-                                <include reference="oY3-P2-Oou"/>
-                                <include reference="tfw-H3-iCh"/>
                                 <include reference="0S9-iU-AIO"/>
                                 <include reference="zKj-Rl-Siv"/>
+                                <include reference="9q5-b2-cPk"/>
+                                <include reference="Bxj-fg-bOg"/>
+                                <include reference="oY3-P2-Oou"/>
+                                <include reference="tfw-H3-iCh"/>
                             </mask>
                         </variation>
                     </view>
@@ -177,6 +178,225 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="883.5" y="479"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="y5X-dC-TbY">
+            <objects>
+                <tabBarController storyboardIdentifier="MapTabBarController" id="ZjO-Z2-Mmw" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="dXQ-nj-cxM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Lkk-WR-g8N" kind="relationship" relationship="viewControllers" id="ahs-Bl-IxL"/>
+                        <segue destination="3ZH-Yw-zSD" kind="relationship" relationship="viewControllers" id="V7k-Fd-SDZ"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wd1-hH-vOR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1617" y="479"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="Mux-kN-OBu">
+            <objects>
+                <viewController id="Lkk-WR-g8N" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="htb-AE-Tae"/>
+                        <viewControllerLayoutGuide type="bottom" id="A9L-Si-6OZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="aKd-d1-Xhz">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ew-ib-pB7">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="kmn-k8-QRq">
+                                        <variation key="widthClass=compact" constant="64"/>
+                                    </constraint>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="On The Map" id="Xop-SB-UEz"/>
+                                </items>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="kmn-k8-QRq"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="kmn-k8-QRq"/>
+                                    </mask>
+                                </variation>
+                            </navigationBar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fRM-RS-j1U">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Lkk-WR-g8N" id="7V5-21-dSQ"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fRM-RS-j1U" firstAttribute="bottom" secondItem="aKd-d1-Xhz" secondAttribute="bottomMargin" id="0N2-4x-XxS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5Ew-ib-pB7" secondAttribute="trailing" constant="-16" id="4LT-t2-fm9"/>
+                            <constraint firstItem="fRM-RS-j1U" firstAttribute="leading" secondItem="aKd-d1-Xhz" secondAttribute="leadingMargin" constant="-16" id="6z8-cM-Bfp"/>
+                            <constraint firstItem="5Ew-ib-pB7" firstAttribute="top" secondItem="aKd-d1-Xhz" secondAttribute="topMargin" id="9nI-nn-hgW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fRM-RS-j1U" secondAttribute="trailing" constant="-16" id="Ckf-Tv-2XP"/>
+                            <constraint firstItem="fRM-RS-j1U" firstAttribute="top" secondItem="5Ew-ib-pB7" secondAttribute="bottom" id="JiO-RV-hMU"/>
+                            <constraint firstItem="5Ew-ib-pB7" firstAttribute="leading" secondItem="aKd-d1-Xhz" secondAttribute="leadingMargin" constant="-16" id="NeO-Fh-4gx"/>
+                            <constraint firstItem="A9L-Si-6OZ" firstAttribute="top" secondItem="fRM-RS-j1U" secondAttribute="bottom" id="QWX-pj-T30"/>
+                            <constraint firstItem="A9L-Si-6OZ" firstAttribute="top" secondItem="fRM-RS-j1U" secondAttribute="bottom" id="auf-ql-JJU">
+                                <variation key="widthClass=compact" constant="8" symbolic="YES"/>
+                            </constraint>
+                            <constraint firstItem="fRM-RS-j1U" firstAttribute="top" secondItem="aKd-d1-Xhz" secondAttribute="topMargin" id="pv4-Sx-582"/>
+                            <constraint firstItem="fRM-RS-j1U" firstAttribute="top" secondItem="aKd-d1-Xhz" secondAttribute="topMargin" id="pyD-sc-cSm"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="5Ew-ib-pB7"/>
+                                <exclude reference="fRM-RS-j1U"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="4LT-t2-fm9"/>
+                                <exclude reference="9nI-nn-hgW"/>
+                                <exclude reference="NeO-Fh-4gx"/>
+                                <exclude reference="0N2-4x-XxS"/>
+                                <exclude reference="6z8-cM-Bfp"/>
+                                <exclude reference="Ckf-Tv-2XP"/>
+                                <exclude reference="JiO-RV-hMU"/>
+                                <exclude reference="pv4-Sx-582"/>
+                                <exclude reference="pyD-sc-cSm"/>
+                                <exclude reference="QWX-pj-T30"/>
+                                <exclude reference="auf-ql-JJU"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="5Ew-ib-pB7"/>
+                                <include reference="fRM-RS-j1U"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="4LT-t2-fm9"/>
+                                <include reference="9nI-nn-hgW"/>
+                                <include reference="NeO-Fh-4gx"/>
+                                <exclude reference="0N2-4x-XxS"/>
+                                <include reference="6z8-cM-Bfp"/>
+                                <include reference="Ckf-Tv-2XP"/>
+                                <include reference="JiO-RV-hMU"/>
+                                <exclude reference="pv4-Sx-582"/>
+                                <exclude reference="pyD-sc-cSm"/>
+                                <include reference="QWX-pj-T30"/>
+                                <exclude reference="auf-ql-JJU"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map" id="tfT-GR-YEA"/>
+                    <connections>
+                        <outlet property="mapView" destination="fRM-RS-j1U" id="Ybh-M3-m0a"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="82V-MA-PRX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2433" y="160"/>
+        </scene>
+        <!--List-->
+        <scene sceneID="cZG-EU-GBe">
+            <objects>
+                <viewController id="3ZH-Yw-zSD" customClass="TableViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Hc4-qa-Cvd"/>
+                        <viewControllerLayoutGuide type="bottom" id="NIz-qZ-1Zi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GXc-Cf-3ON">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5me-BY-lxt">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="cQQ-Ou-Vw2">
+                                        <variation key="widthClass=compact" constant="64"/>
+                                    </constraint>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="On The Map" id="8Zm-17-Wgo"/>
+                                </items>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="cQQ-Ou-Vw2"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="cQQ-Ou-Vw2"/>
+                                    </mask>
+                                </variation>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7ew-B5-wu3">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OTMTableViewReuseId" id="70u-XN-XJt">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="70u-XN-XJt" id="uIX-iP-08d">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5me-BY-lxt" firstAttribute="top" secondItem="GXc-Cf-3ON" secondAttribute="topMargin" id="31B-o1-0ge"/>
+                            <constraint firstItem="5me-BY-lxt" firstAttribute="leading" secondItem="GXc-Cf-3ON" secondAttribute="leadingMargin" constant="-16" id="5TW-SG-Fx9"/>
+                            <constraint firstItem="NIz-qZ-1Zi" firstAttribute="top" secondItem="7ew-B5-wu3" secondAttribute="bottom" id="CLR-Er-APe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7ew-B5-wu3" secondAttribute="trailing" constant="-16" id="J6S-S7-4DM"/>
+                            <constraint firstItem="7ew-B5-wu3" firstAttribute="leading" secondItem="GXc-Cf-3ON" secondAttribute="leadingMargin" constant="-16" id="U3S-FZ-0nv"/>
+                            <constraint firstItem="7ew-B5-wu3" firstAttribute="bottom" secondItem="GXc-Cf-3ON" secondAttribute="bottomMargin" id="btp-Ac-oMc"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5me-BY-lxt" secondAttribute="trailing" constant="-16" id="je3-8J-p1n"/>
+                            <constraint firstItem="7ew-B5-wu3" firstAttribute="top" secondItem="5me-BY-lxt" secondAttribute="bottom" id="rIl-as-l5u"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="5me-BY-lxt"/>
+                                <exclude reference="7ew-B5-wu3"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="31B-o1-0ge"/>
+                                <exclude reference="5TW-SG-Fx9"/>
+                                <exclude reference="je3-8J-p1n"/>
+                                <exclude reference="J6S-S7-4DM"/>
+                                <exclude reference="U3S-FZ-0nv"/>
+                                <exclude reference="btp-Ac-oMc"/>
+                                <exclude reference="rIl-as-l5u"/>
+                                <exclude reference="CLR-Er-APe"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="5me-BY-lxt"/>
+                                <include reference="7ew-B5-wu3"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="31B-o1-0ge"/>
+                                <include reference="5TW-SG-Fx9"/>
+                                <include reference="je3-8J-p1n"/>
+                                <include reference="J6S-S7-4DM"/>
+                                <include reference="U3S-FZ-0nv"/>
+                                <exclude reference="btp-Ac-oMc"/>
+                                <include reference="rIl-as-l5u"/>
+                                <include reference="CLR-Er-APe"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="List" id="3BU-ZO-fol"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7qm-ku-3pU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2433" y="885"/>
         </scene>
     </scenes>
 </document>

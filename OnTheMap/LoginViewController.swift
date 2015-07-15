@@ -47,13 +47,13 @@ class LoginViewController: UIViewController {
 
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
-            self.errorMessageLabel.text = ""
-//            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("ManagerNavigationController") as! UINavigationController
-//            self.presentViewController(controller, animated: true, completion: nil)
 
             self.errorMessageLabel.text = "Login successful :)" // TODO - remove
             println("userId: \(OTMClient.sharedInstance().userID)")
             println("sessionId: \(OTMClient.sharedInstance().sessionID)")
+
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
+            self.presentViewController(controller, animated: true, completion: nil)
         })
     }
 
