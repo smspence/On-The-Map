@@ -52,9 +52,13 @@ class WebHelper : NSObject {
 
     class func visitUrlString(urlString: String, fromViewController viewController: UIViewController) {
 
-        if (urlString.rangeOfString("http://") == nil) && (urlString.rangeOfString("https://") == nil) {
-            self.displayInvalidUrlAlert(viewController)
-        } else if let url = NSURL(string: urlString) {
+        var mutableUrlString = urlString.lowercaseString
+
+        if (mutableUrlString.rangeOfString("http://") == nil) && (mutableUrlString.rangeOfString("https://") == nil) {
+            mutableUrlString = "http://" + mutableUrlString
+        }
+
+        if let url = NSURL(string: mutableUrlString) {
             let app = UIApplication.sharedApplication()
             app.openURL(url)
         } else {

@@ -54,4 +54,34 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
 
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+
+        let reuseId = "pin"
+
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinColor = .Red
+            pinView!.rightCalloutAccessoryView = UIButton.buttonWithType(.DetailDisclosure) as! UIButton
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+
+        return pinView
+    }
+
+    func mapView(mapView: MKMapView!, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+
+        if control == annotationView.rightCalloutAccessoryView {
+            if let urlString = annotationView.annotation.subtitle where urlString != nil {
+                WebHelper.visitUrlString(urlString, fromViewController: self)
+            } else {
+                WebHelper.displayInvalidUrlAlert(self)
+            }
+        }
+    }
+
 }
