@@ -12,13 +12,29 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate, StudentLocationUpdateListener {
 
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapViewNavBar: UINavigationBar!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        addRightBarButtonItems()
+
         ParseClient.sharedInstance().addLocationDataListener(self)
 
-        self.addMapAnnotations()
+        addMapAnnotations()
+    }
+
+    func addRightBarButtonItems() {
+        var navItem = mapViewNavBar.items[0] as! UINavigationItem
+
+        var buttons = [UIBarButtonItem]()
+
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "refreshButtonTapped:")
+        let addLocationButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addLocationButtonTapped:")
+
+        buttons.append(refreshButton)
+        buttons.append(addLocationButton)
+        navItem.setRightBarButtonItems(buttons, animated: false)
     }
 
     func studentLocationDataUpdated() {
@@ -43,7 +59,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, StudentLocationUpd
         self.mapView.addAnnotations(annotations)
     }
 
-    @IBAction func refreshButtonTapped(sender: AnyObject) {
+    func refreshButtonTapped(sender: AnyObject) {
 
         ParseClient.sharedInstance().getStudentLocations() { success in
 
@@ -51,6 +67,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, StudentLocationUpd
                 println("Get student locations failed")
             }
         }
+    }
+
+    @IBAction func logoutButtonTapped(sender: AnyObject) {
+        println("logoutButtonTapped")
+    }
+
+    func addLocationButtonTapped(sender: AnyObject) {
+
+        println("addLocationButtonTapped")
     }
 
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {

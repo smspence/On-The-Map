@@ -252,9 +252,9 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="On The Map" id="Xop-SB-UEz">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="VUP-BX-jNy">
+                                        <barButtonItem key="leftBarButtonItem" title="Logout" id="nF9-u3-gPV">
                                             <connections>
-                                                <action selector="refreshButtonTapped:" destination="Lkk-WR-g8N" id="Bk6-JK-Tco"/>
+                                                <action selector="logoutButtonTapped:" destination="Lkk-WR-g8N" id="MAi-cJ-i1n"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -335,6 +335,7 @@
                     <tabBarItem key="tabBarItem" title="Map" id="tfT-GR-YEA"/>
                     <connections>
                         <outlet property="mapView" destination="fRM-RS-j1U" id="Ybh-M3-m0a"/>
+                        <outlet property="mapViewNavBar" destination="5Ew-ib-pB7" id="WVe-pY-8Bg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="82V-MA-PRX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -353,33 +354,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5me-BY-lxt">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="cQQ-Ou-Vw2">
-                                        <variation key="widthClass=compact" constant="64"/>
-                                    </constraint>
-                                </constraints>
-                                <items>
-                                    <navigationItem title="On The Map" id="8Zm-17-Wgo">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="qVY-0m-Mnw">
-                                            <connections>
-                                                <action selector="refreshButtonTapped:" destination="3ZH-Yw-zSD" id="1Wl-eP-X4g"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="cQQ-Ou-Vw2"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="cQQ-Ou-Vw2"/>
-                                    </mask>
-                                </variation>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7ew-B5-wu3">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -417,6 +391,33 @@
                                     <outlet property="delegate" destination="3ZH-Yw-zSD" id="qMZ-7G-xKX"/>
                                 </connections>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5me-BY-lxt">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="cQQ-Ou-Vw2">
+                                        <variation key="widthClass=compact" constant="64"/>
+                                    </constraint>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="On The Map" id="8Zm-17-Wgo">
+                                        <barButtonItem key="leftBarButtonItem" title="Logout" id="qNW-mT-wcM">
+                                            <connections>
+                                                <action selector="logoutButtonTapped:" destination="3ZH-Yw-zSD" id="NyY-yG-5ku"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="cQQ-Ou-Vw2"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="cQQ-Ou-Vw2"/>
+                                    </mask>
+                                </variation>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -431,8 +432,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="5me-BY-lxt"/>
                                 <exclude reference="7ew-B5-wu3"/>
+                                <exclude reference="5me-BY-lxt"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="CLR-Er-APe"/>
@@ -447,8 +448,8 @@
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="5me-BY-lxt"/>
                                 <include reference="7ew-B5-wu3"/>
+                                <include reference="5me-BY-lxt"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="CLR-Er-APe"/>
@@ -465,6 +466,7 @@
                     <tabBarItem key="tabBarItem" title="List" id="3BU-ZO-fol"/>
                     <connections>
                         <outlet property="locationTable" destination="7ew-B5-wu3" id="XTy-dy-M4k"/>
+                        <outlet property="tableViewNavBar" destination="5me-BY-lxt" id="wdP-fB-qmy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7qm-ku-3pU" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -11,13 +11,29 @@ import UIKit
 class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, StudentLocationUpdateListener {
 
     @IBOutlet weak var locationTable: UITableView!
+    @IBOutlet weak var tableViewNavBar: UINavigationBar!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        addRightBarButtonItems()
+
         ParseClient.sharedInstance().addLocationDataListener(self)
 
         locationTable.reloadData()
+    }
+
+    func addRightBarButtonItems() {
+        var navItem = tableViewNavBar.items[0] as! UINavigationItem
+
+        var buttons = [UIBarButtonItem]()
+
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "refreshButtonTapped:")
+        let addLocationButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addLocationButtonTapped:")
+
+        buttons.append(refreshButton)
+        buttons.append(addLocationButton)
+        navItem.setRightBarButtonItems(buttons, animated: false)
     }
 
     func studentLocationDataUpdated() {
@@ -25,7 +41,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         locationTable.reloadData()
     }
 
-    @IBAction func refreshButtonTapped(sender: AnyObject) {
+    func refreshButtonTapped(sender: AnyObject) {
 
         ParseClient.sharedInstance().getStudentLocations() { success in
 
@@ -33,6 +49,15 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
                 println("Get student locations failed")
             }
         }
+    }
+
+    @IBAction func logoutButtonTapped(sender: AnyObject) {
+        println("logoutButtonTapped")
+    }
+
+    func addLocationButtonTapped(sender: AnyObject) {
+
+        println("addLocationButtonTapped")
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
