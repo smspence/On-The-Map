@@ -28,22 +28,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, StudentLocationUpd
 
     func addMapAnnotations() {
 
-        dispatch_async(dispatch_get_main_queue(), {
+        var annotations = [MKPointAnnotation]()
+        self.mapView.removeAnnotations(self.mapView.annotations)
 
-            var annotations = [MKPointAnnotation]()
-            self.mapView.removeAnnotations(self.mapView.annotations)
+        for entry in ParseClient.sharedInstance().locationList {
+            var annotation = MKPointAnnotation()
+            annotation.coordinate = entry.latLonLocation
+            annotation.title = "\(entry.firstName) \(entry.lastName)"
+            annotation.subtitle = entry.mediaURL
 
-            for entry in ParseClient.sharedInstance().locationList {
-                var annotation = MKPointAnnotation()
-                annotation.coordinate = entry.latLonLocation
-                annotation.title = "\(entry.firstName) \(entry.lastName)"
-                annotation.subtitle = entry.mediaURL
+            annotations.append(annotation)
+        }
 
-                annotations.append(annotation)
-            }
-
-            self.mapView.addAnnotations(annotations)
-        })
+        self.mapView.addAnnotations(annotations)
     }
 
     @IBAction func refreshButtonTapped(sender: AnyObject) {
