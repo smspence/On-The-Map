@@ -64,7 +64,11 @@ class LoginViewController: UIViewController {
                     self.completeLogin()
                 }
             } else {
-                self.displayErrorAlert(errorString!)
+                if let errorString = errorString {
+                    self.displayErrorAlert(errorString)
+                } else {
+                    self.displayErrorAlert("Undefined error")
+                }
             }
         }
     }
