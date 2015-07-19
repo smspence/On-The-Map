@@ -15,7 +15,7 @@ protocol StudentLocationUpdateListener {
 class ParseClient : NSObject {
 
     // Shared data model
-    var locationList = [StudentLocation]()
+    var locationList = [StudentInformation]()
 
     var locationDataListeners = [StudentLocationUpdateListener]()
 

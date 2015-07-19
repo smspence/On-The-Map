@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-struct StudentLocation {
+struct StudentInformation {
     var latLonLocation : CLLocationCoordinate2D
     var firstName : String
     var lastName : String

@@ -56,11 +56,11 @@ extension ParseClient {
                                 // how I display the string in my app, so I remove all occurences of "\n"
                                 let sanitizedLocationString = locationString.stringByReplacingOccurrencesOfString("\n", withString: " ")
 
-                                let entry = StudentLocation(latLonLocation: location,
-                                                            firstName: firstName,
-                                                            lastName:  lastName,
-                                                            mediaURL:  mediaUrl,
-                                                            locationString: sanitizedLocationString)
+                                let entry = StudentInformation(latLonLocation: location,
+                                                               firstName: firstName,
+                                                               lastName:  lastName,
+                                                               mediaURL:  mediaUrl,
+                                                               locationString: sanitizedLocationString)
                                 self.locationList.append(entry)
                         }
                     }
