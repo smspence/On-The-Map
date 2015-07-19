@@ -10,7 +10,10 @@ import Foundation
 
 class ParseClient : NSObject {
 
-    /* Shared session */
+    // Shared data model
+    var locationList = [StudentLocation]()
+
+    // Shared session
     var session: NSURLSession
 
     override init() {
@@ -18,69 +21,97 @@ class ParseClient : NSObject {
         super.init()
     }
 
+    // MARK: - GET
 
-// Example for how to get student locations from Parse:
+    func taskForGETMethod(method: String, parameters: [String : AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+
+        /* 1. Set the parameters */
+        /* 2/3. Build the URL and configure the request */
+        let urlString = Constants.BaseURLSecure + method + WebHelper.escapedParameters(parameters)
+        let url = NSURL(string: urlString)!
+        let request = NSMutableURLRequest(URL: url)
+        request.addValue(ParseClient.Constants.ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(ParseClient.Constants.RESTApiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+
+        /* 4. Make the request */
+        let task = session.dataTaskWithRequest(request) {data, response, downloadError in
+
+            /* 5/6. Parse the data and use the data (happens in completion handler) */
+            if let error = downloadError {
+                completionHandler(result: nil, error: downloadError)
+            } else {
+                ParseClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+            }
+        }
+
+        /* 7. Start the request */
+        task.resume()
+        
+        return task
+    }
+
+// Example for how to post a student location to Parse:
 //    let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
+//    request.HTTPMethod = "POST"
 //    request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
 //    request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+//    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//    request.HTTPBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".dataUsingEncoding(NSUTF8StringEncoding)
 //    let session = NSURLSession.sharedSession()
 //    let task = session.dataTaskWithRequest(request) { data, response, error in
-//        if error != nil { // Handle error...
+//        if error != nil { // Handle error…
 //            return
 //        }
 //        println(NSString(data: data, encoding: NSUTF8StringEncoding))
 //    }
 //    task.resume()
 
+    // MARK: - POST
 
-    func hardCodedLocationData() -> [[String : AnyObject]] {
-        return  [
-            [
-                "createdAt" : "2015-02-24T22:27:14.456Z",
-                "firstName" : "Jessica",
-                "lastName" : "Uelmen",
-                "latitude" : 28.1461248,
-                "longitude" : -82.75676799999999,
-                "mapString" : "Tarpon Springs, FL",
-                "mediaURL" : "www.linkedin.com/in/jessicauelmen/en",
-                "objectId" : "kj18GEaWD8",
-                "uniqueKey" : 872458750,
-                "updatedAt" : "2015-03-09T22:07:09.593Z"
-            ], [
-                "createdAt" : "2015-02-24T22:35:30.639Z",
-                "firstName" : "Gabrielle",
-                "lastName" : "Miller-Messner",
-                "latitude" : 35.1740471,
-                "longitude" : -79.3922539,
-                "mapString" : "Southern Pines, NC",
-                "mediaURL" : "http://www.linkedin.com/pub/gabrielle-miller-messner/11/557/60/en",
-                "objectId" : "8ZEuHF5uX8",
-                "uniqueKey" : 2256298598,
-                "updatedAt" : "2015-03-11T03:23:49.582Z"
-            ], [
-                "createdAt" : "2015-02-24T22:30:54.442Z",
-                "firstName" : "Jason",
-                "lastName" : "Schatz",
-                "latitude" : 37.7617,
-                "longitude" : -122.4216,
-                "mapString" : "18th and Valencia, San Francisco, CA",
-                "mediaURL" : "http://en.wikipedia.org/wiki/Swift_%28programming_language%29",
-                "objectId" : "hiz0vOTmrL",
-                "uniqueKey" : 2362758535,
-                "updatedAt" : "2015-03-10T17:20:31.828Z"
-            ], [
-                "createdAt" : "2015-03-11T02:48:18.321Z",
-                "firstName" : "Jarrod",
-                "lastName" : "Parkes",
-                "latitude" : 34.73037,
-                "longitude" : -86.58611000000001,
-                "mapString" : "Huntsville, Alabama",
-                "mediaURL" : "https://linkedin.com/in/jarrodparkes",
-                "objectId" : "CDHfAy8sdp",
-                "uniqueKey" : 996618664,
-                "updatedAt" : "2015-03-13T03:37:58.389Z"
-            ]
-        ]
+    func taskForPOSTMethod(method: String, parameters: [String : AnyObject], jsonBody: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+
+        /* 1. Set the parameters */
+        /* 2/3. Build the URL and configure the request */
+        let urlString = Constants.BaseURLSecure + method + WebHelper.escapedParameters(parameters)
+        let url = NSURL(string: urlString)!
+        let request = NSMutableURLRequest(URL: url)
+        var jsonifyError: NSError? = nil
+        request.HTTPMethod = "POST"
+        request.addValue(ParseClient.Constants.ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(ParseClient.Constants.RESTApiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(jsonBody, options: nil, error: &jsonifyError)
+
+        /* 4. Make the request */
+        let task = session.dataTaskWithRequest(request) {data, response, downloadError in
+
+            /* 5/6. Parse the data and use the data (happens in completion handler) */
+            if let error = downloadError {
+                completionHandler(result: nil, error: downloadError)
+            } else {
+                ParseClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+            }
+        }
+
+        /* 7. Start the request */
+        task.resume()
+
+        return task
+    }
+
+    /* Helper: Given raw JSON, return a usable Foundation object */
+    class func parseJSONWithCompletionHandler(data: NSData, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+
+        var parsingError: NSError? = nil
+
+        let parsedResult : AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError)
+
+        if let error = parsingError {
+            completionHandler(result: nil, error: error)
+        } else {
+            completionHandler(result: parsedResult, error: nil)
+        }
     }
 
     // MARK: - Shared Instance

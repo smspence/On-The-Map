@@ -36,9 +36,14 @@ class LoginViewController: UIViewController {
             self.errorMessageLabel.text = ""
         }
 
-        UdacityClient.sharedInstance().authenticateWithUsername(textFieldEmail.text, password: textFieldPassword.text) { (success, errorString) in
-            if success {
-                self.completeLogin()
+        UdacityClient.sharedInstance().authenticateWithUsername(textFieldEmail.text, password: textFieldPassword.text) { (loginSuccess, errorString) in
+            if loginSuccess {
+                ParseClient.sharedInstance().getStudentLocations() { success in
+                    if !success {
+                        println("Get student locations failed")
+                    }
+                    self.completeLogin()
+                }
             } else {
                 self.displayError(errorString)
             }

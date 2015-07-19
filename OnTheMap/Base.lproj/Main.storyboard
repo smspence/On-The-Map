@@ -218,7 +218,13 @@
                                     </constraint>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="On The Map" id="Xop-SB-UEz"/>
+                                    <navigationItem title="On The Map" id="Xop-SB-UEz">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="VUP-BX-jNy">
+                                            <connections>
+                                                <action selector="refreshButtonTapped:" destination="Lkk-WR-g8N" id="Bk6-JK-Tco"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -397,6 +403,9 @@
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="List" id="3BU-ZO-fol"/>
+                    <connections>
+                        <outlet property="locationTable" destination="7ew-B5-wu3" id="XTy-dy-M4k"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7qm-ku-3pU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

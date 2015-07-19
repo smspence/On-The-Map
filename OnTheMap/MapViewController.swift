@@ -15,45 +15,41 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
 
-        // The "locations" array is an array of dictionary objects that are similar to the JSON
-        // data that you can download from parse.
-        let locations = ParseClient.sharedInstance().hardCodedLocationData()
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
 
-        // We will create an MKPointAnnotation for each dictionary in "locations". The
-        // point annotations will be stored in this array, and then provided to the map view.
+        addMapAnnotations()
+    }
+
+    func addMapAnnotations() {
+
         var annotations = [MKPointAnnotation]()
+        self.mapView.removeAnnotations(self.mapView.annotations)
 
-        // The "locations" array is loaded with the sample data below. We are using the dictionaries
-        // to create map annotations. This would be more stylish if the dictionaries were being
-        // used to create custom structs. Perhaps StudentLocation structs.
-
-        for dictionary in locations {
-
-            // Notice that the float values are being used to create CLLocationDegree values.
-            // This is a version of the Double type.
-            let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-            let long = CLLocationDegrees(dictionary["longitude"] as! Double)
-
-            // The lat and long are used to create a CLLocationCoordinates2D instance.
-            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-
-            let first = dictionary["firstName"] as! String
-            let last = dictionary["lastName"] as! String
-            let mediaURL = dictionary["mediaURL"] as! String
-
-            // Here we create the annotation and set its coordiate, title, and subtitle properties
+        for entry in ParseClient.sharedInstance().locationList {
             var annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = "\(first) \(last)"
-            annotation.subtitle = mediaURL
+            annotation.coordinate = entry.latLonLocation
+            annotation.title = "\(entry.firstName) \(entry.lastName)"
+            annotation.subtitle = entry.mediaURL
 
-            // Finally we place the annotation in an array of annotations.
             annotations.append(annotation)
         }
 
-        // When the array is complete, we add the annotations to the map.
         self.mapView.addAnnotations(annotations)
+    }
+
+    @IBAction func refreshButtonTapped(sender: AnyObject) {
+
+        ParseClient.sharedInstance().getStudentLocations() { success in
+
+            if success {
+                self.addMapAnnotations()
+            } else {
+                println("Get student locations failed")
+            }
+        }
     }
 
 }

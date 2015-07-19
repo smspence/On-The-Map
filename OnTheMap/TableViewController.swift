@@ -10,29 +10,28 @@ import UIKit
 
 class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet weak var locationTable: UITableView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        locationTable.reloadData()
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ParseClient.sharedInstance().hardCodedLocationData().count
+        return ParseClient.sharedInstance().locationList.count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCellWithIdentifier("OTMTableViewReuseId") as! UITableViewCell
-        let location = ParseClient.sharedInstance().hardCodedLocationData()[indexPath.row]
+        let location = ParseClient.sharedInstance().locationList[indexPath.row]
 
-        // Set the name and image
-        if let firstName = location["firstName"] as? String,
-            let lastName  = location["lastName"] as? String {
-
-                cell.textLabel?.text = firstName + " " + lastName
-        } else {
-            // TODO - remove, find better way to show error
-            cell.textLabel?.text = "Error"
-        }
+        cell.textLabel?.text = location.firstName + " " + location.lastName
 
         return cell
     }
