@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Shawn Spencer. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 class WebHelper : NSObject {
@@ -38,6 +39,27 @@ class WebHelper : NSObject {
         }
 
         return (!urlVars.isEmpty ? "?" : "") + join("&", urlVars)
+    }
+
+    class func displayInvalidUrlAlert(viewController: UIViewController) {
+        let controller = UIAlertController(title: nil, message: "Invalid URL", preferredStyle: UIAlertControllerStyle.Alert)
+
+        let okAction = UIAlertAction(title: "ok", style: UIAlertActionStyle.Default, handler: nil)
+
+        controller.addAction(okAction)
+        viewController.presentViewController(controller, animated: true, completion: nil)
+    }
+
+    class func visitUrlString(urlString: String, fromViewController viewController: UIViewController) {
+
+        if (urlString.rangeOfString("http://") == nil) && (urlString.rangeOfString("https://") == nil) {
+            self.displayInvalidUrlAlert(viewController)
+        } else if let url = NSURL(string: urlString) {
+            let app = UIApplication.sharedApplication()
+            app.openURL(url)
+        } else {
+            self.displayInvalidUrlAlert(viewController)
+        }
     }
 
 }

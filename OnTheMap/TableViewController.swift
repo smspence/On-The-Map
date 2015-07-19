@@ -41,15 +41,10 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // Show the detail view of the selected location
 
-//        detailViewIndexPath = indexPath
-//
-//        let detailVC = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewStoryboardId") as! MemeDetailViewController
-//        detailVC.meme = self.memes[indexPath.item]
-//        detailVC.deletionDelegate = self
-//        detailVC.hidesBottomBarWhenPushed = true
-//        self.navigationController!.pushViewController(detailVC, animated: true)
+        let urlString = ParseClient.sharedInstance().locationList[indexPath.row].mediaURL
+
+        WebHelper.visitUrlString(urlString, fromViewController: self)
     }
 
 }

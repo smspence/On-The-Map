@@ -50,13 +50,18 @@ extension ParseClient {
                             let lat = result["latitude"] as? Double,
                             let lon = result["longitude"] as? Double {
 
-                            let location = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-                            let entry = StudentLocation(latLonLocation: location,
-                                                        firstName: firstName,
-                                                        lastName:  lastName,
-                                                        mediaURL:  mediaUrl,
-                                                        locationString: locationString)
-                            self.locationList.append(entry)
+                                let location = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+
+                                // I found that some users have put "\n" inside their location string, but I don't want this to interfere with
+                                // how I display the string in my app, so I remove all occurences of "\n"
+                                let sanitizedLocationString = locationString.stringByReplacingOccurrencesOfString("\n", withString: " ")
+
+                                let entry = StudentLocation(latLonLocation: location,
+                                                            firstName: firstName,
+                                                            lastName:  lastName,
+                                                            mediaURL:  mediaUrl,
+                                                            locationString: sanitizedLocationString)
+                                self.locationList.append(entry)
                         }
                     }
 

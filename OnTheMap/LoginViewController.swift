@@ -36,9 +36,7 @@ class LoginViewController: UIViewController {
         dispatch_async(dispatch_get_main_queue(), {
             let controller = UIAlertController(title: "Error", message: errorString, preferredStyle: UIAlertControllerStyle.Alert)
 
-            let okAction = UIAlertAction(title: "ok", style: UIAlertActionStyle.Default) {
-                action in self.dismissViewControllerAnimated(true, completion: nil)
-            }
+            let okAction = UIAlertAction(title: "ok", style: UIAlertActionStyle.Default, handler: nil)
 
             controller.addAction(okAction)
             self.presentViewController(controller, animated: true, completion: nil)
