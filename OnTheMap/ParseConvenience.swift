@@ -69,6 +69,10 @@ extension ParseClient {
                     success = true
                 }
 
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.notifyLocationDataListeners()
+                })
+
                 completionHandler(success: success)
             }
 

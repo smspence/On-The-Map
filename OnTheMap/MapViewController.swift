@@ -9,46 +9,48 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, StudentLocationUpdateListener {
 
     @IBOutlet weak var mapView: MKMapView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        ParseClient.sharedInstance().addLocationDataListener(self)
+
+        self.addMapAnnotations()
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
-        addMapAnnotations()
+    func studentLocationDataUpdated() {
+        println("MapViewController studentLocationDataUpdated() called")
+        self.addMapAnnotations()
     }
 
     func addMapAnnotations() {
 
-        var annotations = [MKPointAnnotation]()
-        self.mapView.removeAnnotations(self.mapView.annotations)
+        dispatch_async(dispatch_get_main_queue(), {
 
-        for entry in ParseClient.sharedInstance().locationList {
-            var annotation = MKPointAnnotation()
-            annotation.coordinate = entry.latLonLocation
-            annotation.title = "\(entry.firstName) \(entry.lastName)"
-            annotation.subtitle = entry.mediaURL
+            var annotations = [MKPointAnnotation]()
+            self.mapView.removeAnnotations(self.mapView.annotations)
 
-            annotations.append(annotation)
-        }
+            for entry in ParseClient.sharedInstance().locationList {
+                var annotation = MKPointAnnotation()
+                annotation.coordinate = entry.latLonLocation
+                annotation.title = "\(entry.firstName) \(entry.lastName)"
+                annotation.subtitle = entry.mediaURL
 
-        self.mapView.addAnnotations(annotations)
+                annotations.append(annotation)
+            }
+
+            self.mapView.addAnnotations(annotations)
+        })
     }
 
     @IBAction func refreshButtonTapped(sender: AnyObject) {
 
         ParseClient.sharedInstance().getStudentLocations() { success in
 
-            if success {
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.addMapAnnotations()
-                })
-            } else {
+            if !success {
                 println("Get student locations failed")
             }
         }

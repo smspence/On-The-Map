@@ -8,10 +8,16 @@
 
 import Foundation
 
+protocol StudentLocationUpdateListener {
+    func studentLocationDataUpdated()
+}
+
 class ParseClient : NSObject {
 
     // Shared data model
     var locationList = [StudentLocation]()
+
+    var locationDataListeners = [StudentLocationUpdateListener]()
 
     // Shared session
     var session: NSURLSession
@@ -19,6 +25,18 @@ class ParseClient : NSObject {
     override init() {
         session = NSURLSession.sharedSession()
         super.init()
+    }
+
+    func addLocationDataListener(listener : StudentLocationUpdateListener) {
+        locationDataListeners.append(listener)
+    }
+
+    func notifyLocationDataListeners() {
+        for listener in locationDataListeners {
+            listener.studentLocationDataUpdated()
+        }
+
+        println("Notified \(locationDataListeners.count) listeners")
     }
 
     // MARK: - GET

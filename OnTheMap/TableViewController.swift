@@ -8,18 +8,31 @@
 
 import UIKit
 
-class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, StudentLocationUpdateListener {
 
     @IBOutlet weak var locationTable: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+        ParseClient.sharedInstance().addLocationDataListener(self)
 
         locationTable.reloadData()
+    }
+
+    func studentLocationDataUpdated() {
+        println("TableViewController studentLocationDataUpdated() called")
+        locationTable.reloadData()
+    }
+
+    @IBAction func refreshButtonTapped(sender: AnyObject) {
+
+        ParseClient.sharedInstance().getStudentLocations() { success in
+
+            if !success {
+                println("Get student locations failed")
+            }
+        }
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

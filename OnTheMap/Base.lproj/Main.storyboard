@@ -361,7 +361,13 @@
                                     </constraint>
                                 </constraints>
                                 <items>
-                                    <navigationItem title="On The Map" id="8Zm-17-Wgo"/>
+                                    <navigationItem title="On The Map" id="8Zm-17-Wgo">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="qVY-0m-Mnw">
+                                            <connections>
+                                                <action selector="refreshButtonTapped:" destination="3ZH-Yw-zSD" id="1Wl-eP-X4g"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                                 <variation key="default">
                                     <mask key="constraints">
