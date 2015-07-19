@@ -55,6 +55,7 @@ class LoginViewController: UIViewController {
 
             println("userId: \(UdacityClient.sharedInstance().userID)")
             println("sessionId: \(UdacityClient.sharedInstance().sessionID)")
+            println("user name: \(UdacityClient.sharedInstance().userFirstName) \(UdacityClient.sharedInstance().userLastName)")
 
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
             self.presentViewController(controller, animated: true, completion: nil)

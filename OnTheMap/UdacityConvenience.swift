@@ -21,18 +21,51 @@ extension UdacityClient {
     func authenticateWithUsername(username: String, password: String, completionHandler: (success: Bool, errorString: String?) -> Void) {
 
         // TODO - pass username and password into getSessionID()?
-        self.getSessionIdWithUsername(username, password: password) { (success, sessionID, userID, errorString) in
+        self.getSessionIdWithUsername(username, password: password) { (sessionIdSuccess, sessionID, userID, errorString) in
 
-            if success {
+            if sessionIdSuccess {
 
                 // Success! We have the sessionID and userID
                 self.sessionID = sessionID
                 self.userID = userID
 
-                completionHandler(success: success, errorString: errorString)
+                self.getUserData() { success, firstName, lastName, userDataErrorString in
+
+                    if success {
+                        self.userFirstName = firstName
+                        self.userLastName  = lastName
+                        completionHandler(success: true, errorString: nil)
+                    } else {
+                        completionHandler(success: false, errorString: userDataErrorString)
+                    }
+                }
 
             } else {
-                completionHandler(success: success, errorString: errorString)
+                completionHandler(success: sessionIdSuccess, errorString: errorString)
+            }
+        }
+    }
+
+    func getUserData(completionHandler: (success: Bool, firstName: String?, lastName: String?, errorString: String?) -> Void) {
+
+        let methodName = WebHelper.subtituteKeyInMethod(Methods.UserData, key: "user_id", value: self.userID!)!
+
+        taskForGETMethod(methodName, parameters: [:]) { JSONResult, error in
+
+            if let error = error {
+                println("getUserData taskForGETMethod error: \(error)")
+                completionHandler(success: false, firstName: nil, lastName: nil, errorString: "User data download error")
+            } else {
+
+                if let userData = JSONResult["user"] as? [String : AnyObject],
+                   let firstName = userData["first_name"] as? String,
+                   let lastName  = userData["last_name"] as? String {
+
+                    completionHandler(success: true, firstName: firstName, lastName: lastName, errorString: nil)
+
+                } else {
+                    completionHandler(success: false, firstName: nil, lastName: nil, errorString: "User data JSON error")
+                }
             }
         }
     }

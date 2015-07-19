@@ -17,6 +17,10 @@ class UdacityClient : NSObject {
     var sessionID : String? = nil
     var userID : String? = nil
 
+    /* User data */
+    var userFirstName : String? = nil
+    var userLastName  : String? = nil
+
     override init() {
         session = NSURLSession.sharedSession()
         super.init()
