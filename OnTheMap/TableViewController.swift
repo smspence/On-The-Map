@@ -33,6 +33,10 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
 
         cell.textLabel?.text = location.firstName + " " + location.lastName
 
+        if let detailTextLabel = cell.detailTextLabel {
+            detailTextLabel.text = location.locationString + ", " + location.mediaURL
+        }
+
         return cell
     }
 

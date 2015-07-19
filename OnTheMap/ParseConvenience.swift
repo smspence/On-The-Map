@@ -46,6 +46,7 @@ extension ParseClient {
                         if let firstName = result["firstName"] as? String,
                             let lastName  = result["lastName"] as? String,
                             let mediaUrl  = result["mediaURL"] as? String,
+                            let locationString  = result["mapString"] as? String,
                             let lat = result["latitude"] as? Double,
                             let lon = result["longitude"] as? Double {
 
@@ -53,7 +54,8 @@ extension ParseClient {
                             let entry = StudentLocation(latLonLocation: location,
                                                         firstName: firstName,
                                                         lastName:  lastName,
-                                                        mediaURL:  mediaUrl)
+                                                        mediaURL:  mediaUrl,
+                                                        locationString: locationString)
                             self.locationList.append(entry)
                         }
                     }

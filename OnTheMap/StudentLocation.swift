@@ -14,4 +14,5 @@ struct StudentLocation {
     var firstName : String
     var lastName : String
     var mediaURL : String
+    var locationString : String
 }
