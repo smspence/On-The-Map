@@ -14,14 +14,27 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var errorMessageLabel: UILabel!
 
+    @IBOutlet weak var signUpLink: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+
+        var tapRecognizer = UITapGestureRecognizer(target: self, action: "signUpLinkTapped:")
+        signUpLink.addGestureRecognizer(tapRecognizer)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    func signUpLinkTapped(sender: UITapGestureRecognizer) {
+
+        if sender.state == .Ended {
+            let app = UIApplication.sharedApplication()
+            app.openURL(NSURL(string: "https://www.udacity.com/account/auth#!/signup")!)
+        }
     }
 
     @IBAction func loginButtonTapped(sender: AnyObject) {
