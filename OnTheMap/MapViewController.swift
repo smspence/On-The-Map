@@ -45,7 +45,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         ParseClient.sharedInstance().getStudentLocations() { success in
 
             if success {
-                self.addMapAnnotations()
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.addMapAnnotations()
+                })
             } else {
                 println("Get student locations failed")
             }

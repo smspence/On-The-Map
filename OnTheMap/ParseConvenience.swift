@@ -21,9 +21,10 @@ extension ParseClient {
 
             if let error = error {
                 println("GET StudentLocation download error: \(error)")
-                //completionHandler(success: false, sessionID: nil, userID: nil, errorString: "Get student location download error")
+                completionHandler(success: success)
             } else {
 
+                //Example JSON response in "results" dictionary
                 // {
                 //    createdAt = "2015-07-11T18:23:26.897Z";
                 //    firstName = Shawn;
@@ -37,35 +38,33 @@ extension ParseClient {
                 //    updatedAt = "2015-07-16T17:06:05.403Z";
                 // }
 
-                // println("\(JSONResult)")
-
                 self.locationList.removeAll(keepCapacity: true)
 
                 if let resultsArray = JSONResult["results"] as? [[String:AnyObject]] {
 
                     for result in resultsArray {
-                        let firstName = result["firstName"] as! String
-                        let lastName  = result["lastName"] as! String
-                        let mediaUrl  = result["mediaURL"] as! String
-                        let lat = result["latitude"] as! Double
-                        let lon = result["longitude"] as! Double
-                        //println("result = \(firstName) \(lastName)")
+                        if let firstName = result["firstName"] as? String,
+                            let lastName  = result["lastName"] as? String,
+                            let mediaUrl  = result["mediaURL"] as? String,
+                            let lat = result["latitude"] as? Double,
+                            let lon = result["longitude"] as? Double {
 
-                        let location = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-                        let entry = StudentLocation(latLonLocation: location,
-                                                    firstName: firstName,
-                                                    lastName:  lastName,
-                                                    mediaURL:  mediaUrl)
-                        self.locationList.append(entry)
+                            let location = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+                            let entry = StudentLocation(latLonLocation: location,
+                                                        firstName: firstName,
+                                                        lastName:  lastName,
+                                                        mediaURL:  mediaUrl)
+                            self.locationList.append(entry)
+                        }
                     }
 
                     println("Populated locationList with \(self.locationList.count) entries")
                     success = true
                 }
 
+                completionHandler(success: success)
             }
 
-            completionHandler(success: success)
         }
 
     }

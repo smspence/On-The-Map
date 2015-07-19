@@ -20,7 +20,6 @@ extension UdacityClient {
     */
     func authenticateWithUsername(username: String, password: String, completionHandler: (success: Bool, errorString: String?) -> Void) {
 
-        // TODO - pass username and password into getSessionID()?
         self.getSessionIdWithUsername(username, password: password) { (sessionIdSuccess, sessionID, userID, errorString) in
 
             if sessionIdSuccess {
@@ -29,7 +28,7 @@ extension UdacityClient {
                 self.sessionID = sessionID
                 self.userID = userID
 
-                self.getUserData() { success, firstName, lastName, userDataErrorString in
+                self.getUserData() { (success, firstName, lastName, userDataErrorString) in
 
                     if success {
                         self.userFirstName = firstName
