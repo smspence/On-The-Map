@@ -139,39 +139,13 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axL-q3-JHY">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="49" id="ECB-yK-9p4"/>
-                                    <constraint firstAttribute="width" constant="252" id="cle-c0-R6s"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="ECB-yK-9p4"/>
-                                        <exclude reference="cle-c0-R6s"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="ECB-yK-9p4"/>
-                                        <exclude reference="cle-c0-R6s"/>
-                                    </mask>
-                                </variation>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="axL-q3-JHY" secondAttribute="centerX" id="0S9-iU-AIO"/>
                             <constraint firstAttribute="centerX" secondItem="h1w-a4-Drz" secondAttribute="centerX" constant="-0.5" id="9q5-b2-cPk"/>
                             <constraint firstItem="SdA-jy-ViD" firstAttribute="top" secondItem="Xl4-kS-alb" secondAttribute="bottom" constant="16" id="ASD-rL-YaA"/>
                             <constraint firstItem="h1w-a4-Drz" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="29" id="Bxj-fg-bOg"/>
                             <constraint firstAttribute="centerX" secondItem="SdA-jy-ViD" secondAttribute="centerX" id="FEF-Iu-7SY"/>
-                            <constraint firstItem="axL-q3-JHY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="GtX-QS-1XS"/>
-                            <constraint firstItem="axL-q3-JHY" firstAttribute="top" secondItem="SdA-jy-ViD" secondAttribute="bottom" constant="16" id="HTK-Gt-7Xv"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="axL-q3-JHY" secondAttribute="trailing" constant="10" id="OUK-SA-BIl"/>
                             <constraint firstItem="KM6-R8-MSN" firstAttribute="top" secondItem="5h9-0P-fde" secondAttribute="bottom" constant="26" id="RdN-yy-y5i"/>
                             <constraint firstItem="5h9-0P-fde" firstAttribute="top" secondItem="h1w-a4-Drz" secondAttribute="bottom" constant="92" id="YP1-GQ-XQq"/>
                             <constraint firstItem="SdA-jy-ViD" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="eQn-zC-iwn"/>
@@ -188,7 +162,6 @@
                                 <exclude reference="5h9-0P-fde"/>
                                 <exclude reference="KM6-R8-MSN"/>
                                 <exclude reference="SdA-jy-ViD"/>
-                                <exclude reference="axL-q3-JHY"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="9q5-b2-cPk"/>
@@ -203,10 +176,6 @@
                                 <exclude reference="FEF-Iu-7SY"/>
                                 <exclude reference="eQn-zC-iwn"/>
                                 <exclude reference="s9v-6F-wiF"/>
-                                <exclude reference="0S9-iU-AIO"/>
-                                <exclude reference="GtX-QS-1XS"/>
-                                <exclude reference="HTK-Gt-7Xv"/>
-                                <exclude reference="OUK-SA-BIl"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -216,7 +185,6 @@
                                 <include reference="5h9-0P-fde"/>
                                 <include reference="KM6-R8-MSN"/>
                                 <include reference="SdA-jy-ViD"/>
-                                <include reference="axL-q3-JHY"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="9q5-b2-cPk"/>
@@ -231,15 +199,10 @@
                                 <include reference="FEF-Iu-7SY"/>
                                 <include reference="eQn-zC-iwn"/>
                                 <include reference="s9v-6F-wiF"/>
-                                <include reference="0S9-iU-AIO"/>
-                                <include reference="GtX-QS-1XS"/>
-                                <include reference="HTK-Gt-7Xv"/>
-                                <include reference="OUK-SA-BIl"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="errorMessageLabel" destination="axL-q3-JHY" id="R0y-Us-dg8"/>
                         <outlet property="signUpLink" destination="qBp-79-Foy" id="j9C-I3-hFT"/>
                         <outlet property="textFieldEmail" destination="5h9-0P-fde" id="zM5-gg-RKN"/>
                         <outlet property="textFieldPassword" destination="KM6-R8-MSN" id="MFE-Lb-gjT"/>

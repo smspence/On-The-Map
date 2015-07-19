@@ -120,9 +120,9 @@ extension UdacityClient {
                     }
 
                 } else {
-                    println("Error reading JSON:")
+                    println("Session or account data not found in JSON:")
                     println("\(JSONResult)")
-                    completionHandler(success: false, sessionID: nil, userID: nil, errorString: "Login Failed (Account not found)")
+                    completionHandler(success: false, sessionID: nil, userID: nil, errorString: "Account not found or incorrect password")
                 }
             }
         }

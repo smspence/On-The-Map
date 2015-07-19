@@ -12,7 +12,6 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
-    @IBOutlet weak var errorMessageLabel: UILabel!
 
     @IBOutlet weak var signUpLink: UILabel!
 
@@ -24,11 +23,6 @@ class LoginViewController: UIViewController {
         signUpLink.addGestureRecognizer(tapRecognizer)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     func signUpLinkTapped(sender: UITapGestureRecognizer) {
 
         if sender.state == .Ended {
@@ -37,16 +31,28 @@ class LoginViewController: UIViewController {
         }
     }
 
+    func displayErrorAlert(errorString: String)
+    {
+        dispatch_async(dispatch_get_main_queue(), {
+            let controller = UIAlertController(title: "Error", message: errorString, preferredStyle: UIAlertControllerStyle.Alert)
+
+            let okAction = UIAlertAction(title: "ok", style: UIAlertActionStyle.Default) {
+                action in self.dismissViewControllerAnimated(true, completion: nil)
+            }
+
+            controller.addAction(okAction)
+            self.presentViewController(controller, animated: true, completion: nil)
+        })
+    }
+
     @IBAction func loginButtonTapped(sender: AnyObject) {
 
         if count(textFieldEmail.text) == 0 {
-            self.errorMessageLabel.text = "Please enter email address."
+            self.displayErrorAlert("Please enter email address.")
             return
         } else if count(textFieldPassword.text) == 0 {
-            self.errorMessageLabel.text = "Please enter password."
+            self.displayErrorAlert("Please enter password.")
             return
-        } else {
-            self.errorMessageLabel.text = ""
         }
 
         UdacityClient.sharedInstance().authenticateWithUsername(textFieldEmail.text, password: textFieldPassword.text) { (loginSuccess, errorString) in
@@ -58,7 +64,7 @@ class LoginViewController: UIViewController {
                     self.completeLogin()
                 }
             } else {
-                self.displayError(errorString)
+                self.displayErrorAlert(errorString!)
             }
         }
     }
@@ -72,14 +78,6 @@ class LoginViewController: UIViewController {
 
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
             self.presentViewController(controller, animated: true, completion: nil)
-        })
-    }
-
-    func displayError(errorString: String?) {
-        dispatch_async(dispatch_get_main_queue(), {
-            if let errorString = errorString {
-                self.errorMessageLabel.text = errorString
-            }
         })
     }
 
