@@ -55,7 +55,7 @@ class WebHelper : NSObject {
         var mutableUrlString = urlString.lowercaseString
 
         if (mutableUrlString.rangeOfString("http://") == nil) && (mutableUrlString.rangeOfString("https://") == nil) {
-            mutableUrlString = "http://" + mutableUrlString
+            mutableUrlString = "http://" + urlString
         }
 
         if let url = NSURL(string: mutableUrlString) {
