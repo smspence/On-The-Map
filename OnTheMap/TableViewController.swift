@@ -19,8 +19,6 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         addRightBarButtonItems()
 
         ParseClient.sharedInstance().addLocationDataListener(self)
-
-        locationTable.reloadData()
     }
 
     func addRightBarButtonItems() {
