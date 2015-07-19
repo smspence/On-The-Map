@@ -43,12 +43,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     func refreshButtonTapped(sender: AnyObject) {
 
-        ParseClient.sharedInstance().getStudentLocations() { success in
-
-            if !success {
-                println("Get student locations failed")
-            }
-        }
+        ParseClient.handleRefreshInViewController(self)
     }
 
     @IBAction func logoutButtonTapped(sender: AnyObject) {

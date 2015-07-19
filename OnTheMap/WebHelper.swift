@@ -41,13 +41,21 @@ class WebHelper : NSObject {
         return (!urlVars.isEmpty ? "?" : "") + join("&", urlVars)
     }
 
-    class func displayInvalidUrlAlert(viewController: UIViewController) {
-        let controller = UIAlertController(title: nil, message: "Invalid URL", preferredStyle: UIAlertControllerStyle.Alert)
+    class func displayAlertMessage(message: String, viewController: UIViewController) {
+        let controller = UIAlertController(title: nil, message: message, preferredStyle: UIAlertControllerStyle.Alert)
 
         let okAction = UIAlertAction(title: "ok", style: UIAlertActionStyle.Default, handler: nil)
 
         controller.addAction(okAction)
         viewController.presentViewController(controller, animated: true, completion: nil)
+    }
+
+    class func displayStudentInformationDownloadErrorAlert(viewController: UIViewController) {
+        displayAlertMessage("Error retrieving student information from web service", viewController: viewController)
+    }
+
+    class func displayInvalidUrlAlert(viewController: UIViewController) {
+        displayAlertMessage("Invalid URL", viewController: viewController)
     }
 
     class func visitUrlString(urlString: String, fromViewController viewController: UIViewController) {
@@ -62,7 +70,7 @@ class WebHelper : NSObject {
             let app = UIApplication.sharedApplication()
             app.openURL(url)
         } else {
-            self.displayInvalidUrlAlert(viewController)
+            displayInvalidUrlAlert(viewController)
         }
     }
 

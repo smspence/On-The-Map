@@ -11,6 +11,19 @@ import MapKit
 
 extension ParseClient {
 
+    class func handleRefreshInViewController(viewController: UIViewController) {
+
+        ParseClient.sharedInstance().getStudentLocations() { success in
+
+            if !success {
+                dispatch_async(dispatch_get_main_queue(), {
+                    println("Get student locations failed")
+                    WebHelper.displayStudentInformationDownloadErrorAlert(viewController)
+                })
+            }
+        }
+    }
+
     func getStudentLocations(completionHandler: (success: Bool) -> Void) {
 
         let parameters = ["limit" : 100]

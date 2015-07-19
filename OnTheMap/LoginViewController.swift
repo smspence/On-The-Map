@@ -55,11 +55,22 @@ class LoginViewController: UIViewController {
 
         UdacityClient.sharedInstance().authenticateWithUsername(textFieldEmail.text, password: textFieldPassword.text) { (loginSuccess, errorString) in
             if loginSuccess {
-                ParseClient.sharedInstance().getStudentLocations() { success in
-                    if !success {
-                        println("Get student locations failed")
-                    }
-                    self.completeLogin()
+                ParseClient.sharedInstance().getStudentLocations() { studentInformationDownloadSuccess in
+
+                    dispatch_async(dispatch_get_main_queue(), {
+
+                        println("userId: \(UdacityClient.sharedInstance().userID)")
+                        println("sessionId: \(UdacityClient.sharedInstance().sessionID)")
+                        println("user name: \(UdacityClient.sharedInstance().userFirstName) \(UdacityClient.sharedInstance().userLastName)")
+
+                        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
+                        self.presentViewController(controller, animated: true, completion: {
+                            if !studentInformationDownloadSuccess {
+                                println("Get student locations failed")
+                                WebHelper.displayStudentInformationDownloadErrorAlert(controller)
+                            }
+                        })
+                    })
                 }
             } else {
                 if let errorString = errorString {
@@ -69,18 +80,6 @@ class LoginViewController: UIViewController {
                 }
             }
         }
-    }
-
-    func completeLogin() {
-        dispatch_async(dispatch_get_main_queue(), {
-
-            println("userId: \(UdacityClient.sharedInstance().userID)")
-            println("sessionId: \(UdacityClient.sharedInstance().sessionID)")
-            println("user name: \(UdacityClient.sharedInstance().userFirstName) \(UdacityClient.sharedInstance().userLastName)")
-
-            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
-            self.presentViewController(controller, animated: true, completion: nil)
-        })
     }
 
 }
