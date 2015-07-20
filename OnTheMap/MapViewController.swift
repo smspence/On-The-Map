@@ -70,7 +70,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, StudentLocationUpd
 
     func addLocationButtonTapped(sender: AnyObject) {
 
-        println("addLocationButtonTapped")
+        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("InformationPostingViewControllerId") as! InformationPostingViewController
+        // Set any initial data here before called presentViewController
+        self.presentViewController(controller, animated: true, completion: nil)
     }
 
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
