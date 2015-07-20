@@ -15,12 +15,59 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var signUpLink: UILabel!
 
+    var tapRecognizer : UITapGestureRecognizer!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        var tapRecognizer = UITapGestureRecognizer(target: self, action: "signUpLinkTapped:")
-        signUpLink.addGestureRecognizer(tapRecognizer)
+        let linkTapRecognizer = UITapGestureRecognizer(target: self, action: "signUpLinkTapped:")
+        signUpLink.addGestureRecognizer(linkTapRecognizer)
+
+        textFieldEmail.keyboardType = UIKeyboardType.EmailAddress
+
+        tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
+        tapRecognizer.numberOfTapsRequired = 1
+        tapRecognizer.numberOfTouchesRequired = 1
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        addKeyboardDismissRecognizer()
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        removeKeyboardDismissRecognizer()
+    }
+
+    func addKeyboardDismissRecognizer() {
+
+        self.view.addGestureRecognizer(tapRecognizer)
+    }
+
+    func removeKeyboardDismissRecognizer() {
+
+        self.view.removeGestureRecognizer(tapRecognizer)
+    }
+
+    func endAllTextBoxEditing() {
+        self.view.endEditing(true)
+    }
+
+    func handleSingleTap(recognizer: UITapGestureRecognizer) {
+        if recognizer.state == .Ended {
+            endAllTextBoxEditing()
+        }
+    }
+
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+
+        textField.resignFirstResponder()
+        
+        return true
     }
 
     func signUpLinkTapped(sender: UITapGestureRecognizer) {
