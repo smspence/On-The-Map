@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class InformationPostingViewController: UIViewController {
+class InformationPostingViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var informationPostingNavBar: UINavigationBar!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
@@ -31,6 +31,8 @@ class InformationPostingViewController: UIViewController {
         super.viewDidLoad()
 
         mapView.hidden = true
+
+        locationTextField.delegate = self
 
         tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
         tapRecognizer.numberOfTapsRequired = 1
@@ -69,6 +71,13 @@ class InformationPostingViewController: UIViewController {
         if recognizer.state == .Ended {
             endAllTextBoxEditing()
         }
+    }
+
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+
+        textField.resignFirstResponder()
+
+        return true
     }
 
     func enableMapView() {
