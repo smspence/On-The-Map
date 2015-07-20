@@ -50,7 +50,9 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     func addLocationButtonTapped(sender: AnyObject) {
 
-        println("addLocationButtonTapped")
+        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("InformationPostingViewControllerId") as! InformationPostingViewController
+        // Set any initial data here before called presentViewController
+        self.presentViewController(controller, animated: true, completion: nil)
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
