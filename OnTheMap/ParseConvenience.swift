@@ -11,6 +11,34 @@ import MapKit
 
 extension ParseClient {
 
+    // Example for how to post a student location to Parse:
+    //    let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
+    //    request.HTTPMethod = "POST"
+    //    request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+    //    request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+    //    request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    //    request.HTTPBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".dataUsingEncoding(NSUTF8StringEncoding)
+    //    let session = NSURLSession.sharedSession()
+    //    let task = session.dataTaskWithRequest(request) { data, response, error in
+    //        if error != nil { // Handle error…
+    //            return
+    //        }
+    //        println(NSString(data: data, encoding: NSUTF8StringEncoding))
+    //    }
+    //    task.resume()
+
+    func postStudentInformation(studentInfomation: StudentInformation, uniqueKey: String) {
+
+        var studentInfoDictionary = studentInfomation.getDictionary()
+        studentInfoDictionary[ParseClient.JSONKeys.UniqueKey] = uniqueKey
+
+        taskForPOSTMethod(Methods.StudentLocation, parameters: [:], jsonBody: studentInfoDictionary) { (result: AnyObject!, error: NSError?) in
+
+            println("TODO - implement")
+        }
+
+    }
+
     class func handleRefreshInViewController(viewController: UIViewController) {
 
         ParseClient.sharedInstance().getStudentLocations() { success in

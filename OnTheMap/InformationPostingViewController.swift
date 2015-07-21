@@ -17,7 +17,11 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var findOnMapButton: UIButton!
+    @IBOutlet weak var whereAreYouStudyingLabel: UILabel!
 
+    @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var pleaseEnterUrlLabel: UILabel!
+    @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
 
     let geocoder = CLGeocoder()
@@ -30,9 +34,15 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        mapView.hidden = true
+        mapView.hidden             = true
+        urlTextField.hidden        = true
+        pleaseEnterUrlLabel.hidden = true
+        submitButton.hidden        = true
 
         locationTextField.delegate = self
+        urlTextField.delegate      = self
+
+        urlTextField.keyboardType = UIKeyboardType.URL
 
         tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
         tapRecognizer.numberOfTapsRequired = 1
@@ -42,14 +52,12 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        //subscribeToKeyboardNotifications()
         addKeyboardDismissRecognizer()
     }
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
 
-        //unsubscribeToKeyboardNotifications()
         removeKeyboardDismissRecognizer()
     }
 
@@ -80,9 +88,50 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         return true
     }
 
-    func enableMapView() {
+    func handleUrlSubmission(urlString: String) {
 
-        mapView.hidden = false
+        var mutableUrlString = urlString.lowercaseString
+
+        if (mutableUrlString.rangeOfString("http://") == nil) && (mutableUrlString.rangeOfString("https://") == nil) {
+            mutableUrlString = "http://" + urlString
+        }
+
+        if let url = NSURL(string: mutableUrlString) {
+
+            // TODO - submit mutableUrlString here
+            println("urlString: " + mutableUrlString)
+
+        } else {
+            WebHelper.displayAlertMessage("URL is invalid. Please enter a valid URL.", viewController: self)
+        }
+    }
+
+    @IBAction func submitButtonTapped(sender: AnyObject) {
+
+        if count(urlTextField.text) > 0 {
+
+            handleUrlSubmission(urlTextField.text)
+
+        } else {
+            WebHelper.displayAlertMessage("Please enter a URL.", viewController: self)
+        }
+    }
+
+    func setUpUiElementsForUrlSubmission() {
+
+        locationTextField.hidden        = true
+        findOnMapButton.hidden          = true
+        whereAreYouStudyingLabel.hidden = true
+
+        mapView.hidden             = false
+        urlTextField.hidden        = false
+        pleaseEnterUrlLabel.hidden = false
+        submitButton.hidden        = false
+    }
+
+    func enterMapView() {
+
+        setUpUiElementsForUrlSubmission()
 
         mapView.setRegion(MKCoordinateRegion(center: self.locationCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)), animated: true)
 
@@ -95,6 +144,8 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
     func handleAddressString(addressString: String) {
 
         geocoder.geocodeAddressString(addressString) { (placemarkArray: [AnyObject]!, error: NSError!) -> Void in
+
+            var success = false
 
             if let error = error {
                 println("Geocoder error: \(error)")
@@ -114,21 +165,28 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
                 println("formatted location string = \(self.locationString)")
                 println("lat/lon = (\(self.locationCoordinate.latitude), \(self.locationCoordinate.longitude))")
 
-                self.enableMapView()
+                self.enterMapView()
+
+                success = true
 
             } else {
                 println("Geocode result is nil")
             }
 
+            if !success {
+                WebHelper.displayAlertMessage("Error finding location.", viewController: self)
+            }
         }
     }
 
     @IBAction func findOnMapButtonTapped(sender: AnyObject) {
 
+        // TODO - implement progress indicator
+
         if count(locationTextField.text) > 0 {
             handleAddressString(locationTextField.text)
         } else {
-            println("Please enter a location")
+            WebHelper.displayAlertMessage("Please enter a location.", viewController: self)
         }
     }
 

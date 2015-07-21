@@ -28,4 +28,17 @@ extension ParseClient {
 
     }
 
+    // MARK: - JSON Keys
+    struct JSONKeys {
+
+        static let FirstName : String = "firstName"
+        static let LastName  : String = "lastName"
+        static let MediaUrl  : String = "mediaURL"
+        static let MapString : String = "mapString"
+        static let Latitude  : String = "latitude"
+        static let Longitude : String = "longitude"
+
+        static let UniqueKey : String = "uniqueKey"
+    }
+
 }

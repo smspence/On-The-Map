@@ -10,6 +10,7 @@ import Foundation
 import MapKit
 
 struct StudentInformation {
+
     var latLonLocation : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     var firstName : String = ""
     var lastName : String  = ""
@@ -17,12 +18,13 @@ struct StudentInformation {
     var locationString : String = ""
 
     init(dictionary: [String : AnyObject]) {
-        if let fName = dictionary["firstName"] as? String,
-            let lName  = dictionary["lastName"] as? String,
-            let url  = dictionary["mediaURL"] as? String,
-            let lString  = dictionary["mapString"] as? String,
-            let lat = dictionary["latitude"] as? Double,
-            let lon = dictionary["longitude"] as? Double {
+
+        if let fName = dictionary[ParseClient.JSONKeys.FirstName] as? String,
+            let lName  = dictionary[ParseClient.JSONKeys.LastName] as? String,
+            let url  = dictionary[ParseClient.JSONKeys.MediaUrl] as? String,
+            let lString  = dictionary[ParseClient.JSONKeys.MapString] as? String,
+            let lat = dictionary[ParseClient.JSONKeys.Latitude] as? Double,
+            let lon = dictionary[ParseClient.JSONKeys.Longitude] as? Double {
 
                 let location = CLLocationCoordinate2D(latitude: lat, longitude: lon)
 
@@ -37,4 +39,17 @@ struct StudentInformation {
                 locationString = sanitizedLocationString
         }
     }
+
+    func getDictionary() -> [String : AnyObject] {
+
+        return [
+            ParseClient.JSONKeys.FirstName : firstName,
+            ParseClient.JSONKeys.LastName  : lastName,
+            ParseClient.JSONKeys.MediaUrl  : mediaURL,
+            ParseClient.JSONKeys.MapString : locationString,
+            ParseClient.JSONKeys.Latitude  : latLonLocation.latitude,
+            ParseClient.JSONKeys.Longitude : latLonLocation.longitude
+        ]
+    }
+
 }
