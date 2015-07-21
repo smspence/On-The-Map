@@ -92,6 +92,8 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginButtonTapped(sender: AnyObject) {
 
+        endAllTextBoxEditing()
+
         if count(textFieldEmail.text) == 0 {
             self.displayErrorAlert("Please enter email address.")
             return
@@ -101,21 +103,19 @@ class LoginViewController: UIViewController {
         }
 
         UdacityClient.sharedInstance().authenticateWithUsername(textFieldEmail.text, password: textFieldPassword.text) { (loginSuccess, errorString) in
+
             if loginSuccess {
-                ParseClient.sharedInstance().getStudentLocations() { studentInformationDownloadSuccess in
 
-                    println("userId: \(UdacityClient.sharedInstance().userID)")
-                    println("sessionId: \(UdacityClient.sharedInstance().sessionID)")
-                    println("user name: \(UdacityClient.sharedInstance().userFirstName) \(UdacityClient.sharedInstance().userLastName)")
+                println("userId: \(UdacityClient.sharedInstance().userID)")
+                println("sessionId: \(UdacityClient.sharedInstance().sessionID)")
+                println("user name: \(UdacityClient.sharedInstance().userFirstName) \(UdacityClient.sharedInstance().userLastName)")
 
-                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
-                    self.presentViewController(controller, animated: true, completion: {
-                        if !studentInformationDownloadSuccess {
-                            println("Get student locations failed")
-                            WebHelper.displayStudentInformationDownloadErrorAlert(controller)
-                        }
-                    })
-                }
+                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
+                self.presentViewController(controller, animated: true, completion: {
+                    // After the map tab bar controller has been presented, refresh the student location data
+                    ParseClient.handleRefreshInViewController(controller)
+                })
+
             } else {
                 if let errorString = errorString {
                     self.displayErrorAlert(errorString)
