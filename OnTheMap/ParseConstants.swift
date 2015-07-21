@@ -19,6 +19,8 @@ extension ParseClient {
         static let ApplicationID : String = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
         static let RESTApiKey    : String = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
 
+        static let HeaderFieldApplicationId : String = "X-Parse-Application-Id"
+        static let HeaderFieldRESTApiKey    : String = "X-Parse-REST-API-Key"
     }
 
     // MARK: - Methods

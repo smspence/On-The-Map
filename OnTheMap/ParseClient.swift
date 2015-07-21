@@ -48,8 +48,8 @@ class ParseClient : NSObject {
         let urlString = Constants.BaseURLSecure + method + WebHelper.escapedParameters(parameters)
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
-        request.addValue(ParseClient.Constants.ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue(ParseClient.Constants.RESTApiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue(ParseClient.Constants.ApplicationID, forHTTPHeaderField: ParseClient.Constants.HeaderFieldApplicationId)
+        request.addValue(ParseClient.Constants.RESTApiKey,    forHTTPHeaderField: ParseClient.Constants.HeaderFieldRESTApiKey)
 
         /* 4. Make the request */
         let task = session.dataTaskWithRequest(request) {data, response, downloadError in
@@ -79,8 +79,8 @@ class ParseClient : NSObject {
         let request = NSMutableURLRequest(URL: url)
         var jsonifyError: NSError? = nil
         request.HTTPMethod = "POST"
-        request.addValue(ParseClient.Constants.ApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue(ParseClient.Constants.RESTApiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue(ParseClient.Constants.ApplicationID, forHTTPHeaderField: ParseClient.Constants.HeaderFieldApplicationId)
+        request.addValue(ParseClient.Constants.RESTApiKey,    forHTTPHeaderField: ParseClient.Constants.HeaderFieldRESTApiKey)
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.HTTPBody = NSJSONSerialization.dataWithJSONObject(jsonBody, options: nil, error: &jsonifyError)
