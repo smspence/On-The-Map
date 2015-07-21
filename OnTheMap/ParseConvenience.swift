@@ -33,7 +33,7 @@ extension ParseClient {
                 if let createdAtString = JSONResult[ParseClient.JSONKeys.CreatedAt] as? String,
                     let objectIdString = JSONResult[ParseClient.JSONKeys.ObjectId] as? String {
 
-                        println("POST StudentLocation successfull")
+                        println("POST StudentLocation successful")
                         println("createdAt: \(createdAtString)")
                         println("objectId: \(objectIdString)")
 
@@ -42,9 +42,9 @@ extension ParseClient {
             }
 
             // call completion handler on the main thread
-            dispatch_async(dispatch_get_main_queue(), {
+            dispatch_async(dispatch_get_main_queue()) {
                 completionHandler(success: success)
-            })
+            }
         }
 
     }
@@ -54,10 +54,8 @@ extension ParseClient {
         ParseClient.sharedInstance().getStudentLocations() { success in
 
             if !success {
-                dispatch_async(dispatch_get_main_queue(), {
-                    println("Get student locations failed")
-                    WebHelper.displayStudentInformationDownloadErrorAlert(viewController)
-                })
+                println("Get student locations failed")
+                WebHelper.displayStudentInformationDownloadErrorAlert(viewController)
             }
         }
     }
@@ -72,7 +70,6 @@ extension ParseClient {
 
             if let error = error {
                 println("GET StudentLocation download error: \(error)")
-                completionHandler(success: success)
             } else {
 
                 //Example JSON response in "results" dictionary
@@ -101,13 +98,15 @@ extension ParseClient {
                     success = true
                 }
 
-                dispatch_async(dispatch_get_main_queue(), {
+                dispatch_async(dispatch_get_main_queue()) {
                     self.notifyLocationDataListeners()
-                })
-
-                completionHandler(success: success)
+                }
             }
 
+            // call completion handler on the main thread
+            dispatch_async(dispatch_get_main_queue()) {
+                completionHandler(success: success)
+            }
         }
 
     }

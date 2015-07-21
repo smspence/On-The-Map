@@ -108,12 +108,16 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
 
             let udacityUserId = UdacityClient.sharedInstance().userID!
 
-            ParseClient.sharedInstance().postStudentInformation(studentInformation, uniqueKey: udacityUserId) { (success) in
+            ParseClient.sharedInstance().postStudentInformation(studentInformation, uniqueKey: udacityUserId) { successfulPost in
 
-                if success {
+                if successfulPost {
 
-                    // TODO - remove this and do real handling
                     println("Successfully posted location!")
+
+                    // Refresh the student information data (in the presenting view controller)
+                    //  and dismiss this view (go back to presenting view controller)
+                    ParseClient.handleRefreshInViewController(self.presentingViewController!)
+                    self.dismissViewControllerAnimated(true, completion: nil)
 
                 } else {
                     WebHelper.displayAlertMessage("Failed to post information to web service.", viewController: self)

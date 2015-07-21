@@ -63,6 +63,7 @@ extension UdacityClient {
                     completionHandler(success: true, firstName: firstName, lastName: lastName, errorString: nil)
 
                 } else {
+                    println("In UdacityClient getUserData, erroneous JSON encountered:\n\(JSONResult)")
                     completionHandler(success: false, firstName: nil, lastName: nil, errorString: "User data JSON error")
                 }
             }

@@ -104,19 +104,16 @@ class LoginViewController: UIViewController {
             if loginSuccess {
                 ParseClient.sharedInstance().getStudentLocations() { studentInformationDownloadSuccess in
 
-                    dispatch_async(dispatch_get_main_queue(), {
+                    println("userId: \(UdacityClient.sharedInstance().userID)")
+                    println("sessionId: \(UdacityClient.sharedInstance().sessionID)")
+                    println("user name: \(UdacityClient.sharedInstance().userFirstName) \(UdacityClient.sharedInstance().userLastName)")
 
-                        println("userId: \(UdacityClient.sharedInstance().userID)")
-                        println("sessionId: \(UdacityClient.sharedInstance().sessionID)")
-                        println("user name: \(UdacityClient.sharedInstance().userFirstName) \(UdacityClient.sharedInstance().userLastName)")
-
-                        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
-                        self.presentViewController(controller, animated: true, completion: {
-                            if !studentInformationDownloadSuccess {
-                                println("Get student locations failed")
-                                WebHelper.displayStudentInformationDownloadErrorAlert(controller)
-                            }
-                        })
+                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("MapTabBarController") as! UITabBarController
+                    self.presentViewController(controller, animated: true, completion: {
+                        if !studentInformationDownloadSuccess {
+                            println("Get student locations failed")
+                            WebHelper.displayStudentInformationDownloadErrorAlert(controller)
+                        }
                     })
                 }
             } else {
