@@ -98,8 +98,27 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
 
         if let url = NSURL(string: mutableUrlString) {
 
-            // TODO - submit mutableUrlString here
             println("urlString: " + mutableUrlString)
+
+            let studentInformation = StudentInformation(latLonLocation: self.locationCoordinate,
+                                                        firstName: UdacityClient.sharedInstance().userFirstName!,
+                                                        lastName:  UdacityClient.sharedInstance().userLastName!,
+                                                        mediaURL:  mutableUrlString,
+                                                        locationString: self.locationString)
+
+            let udacityUserId = UdacityClient.sharedInstance().userID!
+
+            ParseClient.sharedInstance().postStudentInformation(studentInformation, uniqueKey: udacityUserId) { (success) in
+
+                if success {
+
+                    // TODO - remove this and do real handling
+                    println("Successfully posted location!")
+
+                } else {
+                    WebHelper.displayAlertMessage("Failed to post information to web service.", viewController: self)
+                }
+            }
 
         } else {
             WebHelper.displayAlertMessage("URL is invalid. Please enter a valid URL.", viewController: self)

@@ -17,26 +17,39 @@ struct StudentInformation {
     var mediaURL : String  = ""
     var locationString : String = ""
 
+    init(latLonLocation: CLLocationCoordinate2D,
+        firstName: String,
+        lastName:  String,
+        mediaURL:  String,
+        locationString: String) {
+
+            self.latLonLocation = latLonLocation
+            self.firstName      = firstName
+            self.lastName       = lastName
+            self.mediaURL       = mediaURL
+            self.locationString = locationString
+    }
+
     init(dictionary: [String : AnyObject]) {
 
-        if let fName = dictionary[ParseClient.JSONKeys.FirstName] as? String,
-            let lName  = dictionary[ParseClient.JSONKeys.LastName] as? String,
-            let url  = dictionary[ParseClient.JSONKeys.MediaUrl] as? String,
-            let lString  = dictionary[ParseClient.JSONKeys.MapString] as? String,
+        if let firstName  = dictionary[ParseClient.JSONKeys.FirstName] as? String,
+            let lastName  = dictionary[ParseClient.JSONKeys.LastName] as? String,
+            let url       = dictionary[ParseClient.JSONKeys.MediaUrl] as? String,
+            let locationString = dictionary[ParseClient.JSONKeys.MapString] as? String,
             let lat = dictionary[ParseClient.JSONKeys.Latitude] as? Double,
             let lon = dictionary[ParseClient.JSONKeys.Longitude] as? Double {
 
-                let location = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+                let locationCoordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
 
                 // I found that some users have put "\n" inside their location string, but I don't want this to interfere with
                 // how I display the string in my app, so I remove all occurences of "\n"
-                let sanitizedLocationString = lString.stringByReplacingOccurrencesOfString("\n", withString: " ")
+                let sanitizedLocationString = locationString.stringByReplacingOccurrencesOfString("\n", withString: " ")
 
-                latLonLocation = location
-                firstName = fName
-                lastName = lName
-                mediaURL = url
-                locationString = sanitizedLocationString
+                self.latLonLocation = locationCoordinate
+                self.firstName      = firstName
+                self.lastName       = lastName
+                self.mediaURL       = url
+                self.locationString = sanitizedLocationString
         }
     }
 

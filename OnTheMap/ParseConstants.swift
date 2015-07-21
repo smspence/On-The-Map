@@ -41,6 +41,10 @@ extension ParseClient {
         static let Longitude : String = "longitude"
 
         static let UniqueKey : String = "uniqueKey"
+
+        // POST StudentLocation respone keys
+        static let CreatedAt : String = "createdAt"
+        static let ObjectId : String  = "objectId"
     }
 
 }
