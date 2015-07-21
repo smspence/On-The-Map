@@ -33,14 +33,20 @@ extension UdacityClient {
                     if success {
                         self.userFirstName = firstName
                         self.userLastName  = lastName
-                        completionHandler(success: true, errorString: nil)
+                        dispatch_async(dispatch_get_main_queue()) {
+                            completionHandler(success: true, errorString: nil)
+                        }
                     } else {
-                        completionHandler(success: false, errorString: userDataErrorString)
+                        dispatch_async(dispatch_get_main_queue()) {
+                            completionHandler(success: false, errorString: userDataErrorString)
+                        }
                     }
                 }
 
             } else {
-                completionHandler(success: sessionIdSuccess, errorString: errorString)
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler(success: sessionIdSuccess, errorString: errorString)
+                }
             }
         }
     }

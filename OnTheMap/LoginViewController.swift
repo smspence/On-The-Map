@@ -80,14 +80,12 @@ class LoginViewController: UIViewController {
 
     func displayErrorAlert(errorString: String)
     {
-        dispatch_async(dispatch_get_main_queue(), {
-            let controller = UIAlertController(title: "Error", message: errorString, preferredStyle: UIAlertControllerStyle.Alert)
+        let controller = UIAlertController(title: "Error", message: errorString, preferredStyle: UIAlertControllerStyle.Alert)
 
-            let okAction = UIAlertAction(title: "ok", style: UIAlertActionStyle.Default, handler: nil)
+        let okAction = UIAlertAction(title: "ok", style: UIAlertActionStyle.Default, handler: nil)
 
-            controller.addAction(okAction)
-            self.presentViewController(controller, animated: true, completion: nil)
-        })
+        controller.addAction(okAction)
+        self.presentViewController(controller, animated: true, completion: nil)
     }
 
     @IBAction func loginButtonTapped(sender: AnyObject) {
