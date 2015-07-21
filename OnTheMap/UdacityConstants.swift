@@ -30,7 +30,7 @@ extension UdacityClient {
     // MARK: - JSON Body Keys
     struct JSONBodyKeys {
 
-        static let Udacity = "udacity"
+        static let Udacity  = "udacity"
         static let Username = "username"
         static let Password = "password"
 
@@ -40,12 +40,17 @@ extension UdacityClient {
     struct JSONResponseKeys {
 
         // MARK: Authorization
-        static let Session = "session"
-        static let Id = "id"
+        static let Session    = "session"
+        static let Id         = "id"
         static let Expiration = "expiration"
-        static let Account = "account"
+        static let Account    = "account"
         static let Registered = "registered"
-        static let Key = "key"
+        static let Key        = "key"
+
+        // MARK: User Data
+        static let User      = "user"
+        static let FirstName = "first_name"
+        static let LastName  = "last_name"
 
     }
 

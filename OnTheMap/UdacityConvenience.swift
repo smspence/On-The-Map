@@ -56,9 +56,9 @@ extension UdacityClient {
                 completionHandler(success: false, firstName: nil, lastName: nil, errorString: "User data download error")
             } else {
 
-                if let userData = JSONResult["user"] as? [String : AnyObject],
-                   let firstName = userData["first_name"] as? String,
-                   let lastName  = userData["last_name"] as? String {
+                if let userData = JSONResult[UdacityClient.JSONResponseKeys.User] as? [String : AnyObject],
+                   let firstName = userData[UdacityClient.JSONResponseKeys.FirstName] as? String,
+                   let lastName  = userData[UdacityClient.JSONResponseKeys.LastName] as? String {
 
                     completionHandler(success: true, firstName: firstName, lastName: lastName, errorString: nil)
 
