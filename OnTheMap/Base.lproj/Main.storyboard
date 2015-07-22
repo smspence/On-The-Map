@@ -92,25 +92,31 @@
                                     </mask>
                                 </variation>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to Udacity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJa-y2-cE2">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SdA-jy-ViD">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oi8-jo-5tr">
-                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="36" y="11" width="188" height="21"/>
-                                        </variation>
-                                    </label>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qBp-79-Foy">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="232" y="11" width="78" height="21"/>
+                                            <rect key="frame" x="217" y="11" width="78" height="21"/>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oi8-jo-5tr">
+                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="26" y="11" width="188" height="21"/>
                                         </variation>
                                     </label>
                                 </subviews>
@@ -119,32 +125,29 @@
                                     <constraint firstAttribute="height" constant="44" id="dDH-Vf-4r2">
                                         <variation key="widthClass=compact" constant="43"/>
                                     </constraint>
+                                    <constraint firstAttribute="width" constant="312" id="yEG-Dj-lHQ"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
-                                        <exclude reference="oi8-jo-5tr"/>
                                         <exclude reference="qBp-79-Foy"/>
+                                        <exclude reference="oi8-jo-5tr"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="dDH-Vf-4r2"/>
+                                        <exclude reference="yEG-Dj-lHQ"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
                                     <mask key="subviews">
-                                        <include reference="oi8-jo-5tr"/>
                                         <include reference="qBp-79-Foy"/>
+                                        <include reference="oi8-jo-5tr"/>
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="dDH-Vf-4r2"/>
+                                        <include reference="yEG-Dj-lHQ"/>
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to Udacity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJa-y2-cE2">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -169,8 +172,8 @@
                                 <exclude reference="h1w-a4-Drz"/>
                                 <exclude reference="5h9-0P-fde"/>
                                 <exclude reference="KM6-R8-MSN"/>
-                                <exclude reference="SdA-jy-ViD"/>
                                 <exclude reference="TJa-y2-cE2"/>
+                                <exclude reference="SdA-jy-ViD"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="IVy-4a-xcR"/>
@@ -195,8 +198,8 @@
                                 <include reference="h1w-a4-Drz"/>
                                 <include reference="5h9-0P-fde"/>
                                 <include reference="KM6-R8-MSN"/>
-                                <include reference="SdA-jy-ViD"/>
                                 <include reference="TJa-y2-cE2"/>
+                                <include reference="SdA-jy-ViD"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="IVy-4a-xcR"/>
@@ -211,8 +214,8 @@
                                 <include reference="tfw-H3-iCh"/>
                                 <include reference="ASD-rL-YaA"/>
                                 <include reference="FEF-Iu-7SY"/>
-                                <include reference="eQn-zC-iwn"/>
-                                <include reference="s9v-6F-wiF"/>
+                                <exclude reference="eQn-zC-iwn"/>
+                                <exclude reference="s9v-6F-wiF"/>
                             </mask>
                         </variation>
                     </view>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
@@ -23,8 +23,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        let linkTapRecognizer = UITapGestureRecognizer(target: self, action: "signUpLinkTapped:")
-        signUpLink.addGestureRecognizer(linkTapRecognizer)
+        textFieldEmail.delegate    = self
+        textFieldPassword.delegate = self
 
         textFieldEmail.keyboardType = UIKeyboardType.EmailAddress
 
@@ -33,6 +33,9 @@ class LoginViewController: UIViewController {
         tapRecognizer.numberOfTouchesRequired = 1
 
         loginButton.setTitle("Logging In...", forState: UIControlState.Disabled)
+
+        let linkTapRecognizer = UITapGestureRecognizer(target: self, action: "signUpLinkTapped:")
+        signUpLink.addGestureRecognizer(linkTapRecognizer)
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -85,7 +88,11 @@ class LoginViewController: UIViewController {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
 
         textField.resignFirstResponder()
-        
+
+        if textField === textFieldPassword {
+            loginButtonTapped(loginButton)
+        }
+
         return true
     }
 
