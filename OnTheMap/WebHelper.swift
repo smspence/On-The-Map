@@ -50,10 +50,6 @@ class WebHelper : NSObject {
         viewController.presentViewController(controller, animated: true, completion: nil)
     }
 
-    class func displayStudentInformationDownloadErrorAlert(viewController: UIViewController) {
-        displayAlertMessage("Error retrieving student information from web service.", viewController: viewController)
-    }
-
     class func displayInvalidUrlAlert(viewController: UIViewController) {
         displayAlertMessage("Invalid URL.", viewController: viewController)
     }

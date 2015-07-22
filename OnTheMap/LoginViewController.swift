@@ -97,25 +97,15 @@ class LoginViewController: UIViewController {
         }
     }
 
-    func displayErrorAlert(errorString: String)
-    {
-        let controller = UIAlertController(title: "Error", message: errorString, preferredStyle: UIAlertControllerStyle.Alert)
-
-        let okAction = UIAlertAction(title: "ok", style: UIAlertActionStyle.Default, handler: nil)
-
-        controller.addAction(okAction)
-        self.presentViewController(controller, animated: true, completion: nil)
-    }
-
     @IBAction func loginButtonTapped(sender: AnyObject) {
 
         endAllTextBoxEditing()
 
         if count(textFieldEmail.text) == 0 {
-            self.displayErrorAlert("Please enter email address.")
+            WebHelper.displayAlertMessage("Please enter email address.", viewController: self)
             return
         } else if count(textFieldPassword.text) == 0 {
-            self.displayErrorAlert("Please enter password.")
+            WebHelper.displayAlertMessage("Please enter password.", viewController: self)
             return
         }
 
@@ -140,9 +130,9 @@ class LoginViewController: UIViewController {
                 self.loginButton.enabled = true
 
                 if let errorString = errorString {
-                    self.displayErrorAlert(errorString)
+                    WebHelper.displayAlertMessage(errorString, viewController: self)
                 } else {
-                    self.displayErrorAlert("Undefined error")
+                    WebHelper.displayAlertMessage("An undefined login error has occurred.", viewController: self)
                 }
             }
         }

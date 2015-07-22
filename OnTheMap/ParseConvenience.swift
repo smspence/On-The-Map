@@ -55,7 +55,7 @@ extension ParseClient {
 
             if !success {
                 println("Get student locations failed")
-                WebHelper.displayStudentInformationDownloadErrorAlert(viewController)
+                WebHelper.displayAlertMessage("Error retrieving student information from web service.", viewController: viewController)
             }
         }
     }
