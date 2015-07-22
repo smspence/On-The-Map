@@ -11,6 +11,43 @@ import Foundation
 
 extension UdacityClient {
 
+    class func handleLogoutInViewController(viewController: UIViewController) {
+
+        UdacityClient.sharedInstance().taskForDELETESessionMethod() { JSONResult, error in
+
+            var success = false
+
+            if let error = error {
+                println("handleLogoutInViewController download error: \(error)")
+            } else {
+
+                //Example JSON response:
+                // {
+                //     "session": {
+                //         "id": "1463940997_7b474542a32efb8096ab58ced0b748fe",
+                //         "expiration": "2015-07-22T18:16:37.881210Z"
+                //     }
+                // }
+
+                if let sessionInfo = JSONResult[JSONResponseKeys.Session] as? [String : AnyObject],
+                    let sessionID = sessionInfo[JSONResponseKeys.Id] as? String {
+
+                        println("Logout successful, returned session id: \(sessionID)")
+
+                        success = true
+                }
+            }
+
+            dispatch_async(dispatch_get_main_queue()) {
+                if success {
+                    viewController.dismissViewControllerAnimated(true, completion: nil)
+                } else {
+                    WebHelper.displayAlertMessage("Logout operation failed.", viewController: viewController)
+                }
+            }
+        }
+    }
+
     // MARK: - Authentication (GET) Methods
     /*
     Steps for Authentication...

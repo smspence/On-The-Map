@@ -40,7 +40,7 @@ class UdacityClient : NSObject {
         let task = session.dataTaskWithRequest(request) {data, response, downloadError in
 
             /* 5/6. Parse the data and use the data (happens in completion handler) */
-            if let error = downloadError {
+            if let downloadError = downloadError {
                 completionHandler(result: nil, error: downloadError)
             } else {
                 UdacityClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
@@ -72,7 +72,7 @@ class UdacityClient : NSObject {
         let task = session.dataTaskWithRequest(request) {data, response, downloadError in
 
             /* 5/6. Parse the data and use the data (happens in completion handler) */
-            if let error = downloadError {
+            if let downloadError = downloadError {
                 completionHandler(result: nil, error: downloadError)
             } else {
                 UdacityClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
@@ -80,6 +80,35 @@ class UdacityClient : NSObject {
         }
 
         /* 7. Start the request */
+        task.resume()
+
+        return task
+    }
+
+    // MARK: - DELETE
+
+    func taskForDELETESessionMethod(completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+
+        let request = NSMutableURLRequest(URL: NSURL(string: UdacityClient.Constants.BaseURLSecure + UdacityClient.Methods.Session)!)
+        request.HTTPMethod = "DELETE"
+        var xsrfCookie: NSHTTPCookie? = nil
+        let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        for cookie in sharedCookieStorage.cookies as! [NSHTTPCookie] {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.addValue(xsrfCookie.value!, forHTTPHeaderField: "X-XSRF-Token")
+        }
+
+        let task = session.dataTaskWithRequest(request) { data, response, downloadError in
+
+            if let downloadError = downloadError {
+                completionHandler(result: nil, error: downloadError)
+            } else {
+                UdacityClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+            }
+        }
+
         task.resume()
 
         return task
@@ -96,9 +125,9 @@ class UdacityClient : NSObject {
         Special Note on Udacity JSON Responses:
 
         FOR ALL RESPONSES FROM THE UDACITY API, YOU WILL NEED TO SKIP THE FIRST 5 CHARACTERS OF THE RESPONSE.
-        These characters are used for security purposes. In the examples, you will see that we subset the response data in order to skip over them.
+        These characters are used for security purposes. We subset the response data in order to skip over them.
         */
-        let dataSubset = data.subdataWithRange(NSMakeRange(5, data.length - 5)) // subset response data!
+        let dataSubset = data.subdataWithRange(NSMakeRange(5, data.length - 5))
 
         let parsedResult : AnyObject? = NSJSONSerialization.JSONObjectWithData(dataSubset, options: NSJSONReadingOptions.AllowFragments, error: &parsingError)
 

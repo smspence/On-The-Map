@@ -65,7 +65,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, StudentLocationUpd
     }
 
     @IBAction func logoutButtonTapped(sender: AnyObject) {
-        println("logoutButtonTapped")
+
+        UdacityClient.handleLogoutInViewController(self)
     }
 
     func addLocationButtonTapped(sender: AnyObject) {

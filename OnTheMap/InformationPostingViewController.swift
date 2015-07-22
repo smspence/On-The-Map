@@ -114,10 +114,12 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
 
                     println("Successfully posted location!")
 
-                    // Refresh the student information data (in the presenting view controller)
-                    //  and dismiss this view (go back to presenting view controller)
-                    ParseClient.handleRefreshInViewController(self.presentingViewController!)
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    // Dismiss this view (go back to the presenting view controller)
+                    //  and refresh the StudentLocation data from Parse (in the presenting view controller)
+                    let presentingViewController = self.presentingViewController!
+                    self.dismissViewControllerAnimated(true, completion: {
+                        ParseClient.handleRefreshInViewController(presentingViewController)
+                    })
 
                 } else {
                     WebHelper.displayAlertMessage("Failed to post information to web service.", viewController: self)
@@ -171,7 +173,7 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
             var success = false
 
             if let error = error {
-                println("Geocoder error: \(error)")
+                println("Geocoder download error: \(error)")
             } else if let placemarkArray = placemarkArray as? [CLPlacemark] {
 
                 let placemark = placemarkArray[0]

@@ -13,6 +13,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
 
+    @IBOutlet weak var loginButton: UIButton!
+
     @IBOutlet weak var signUpLink: UILabel!
 
     var tapRecognizer : UITapGestureRecognizer!
@@ -29,10 +31,16 @@ class LoginViewController: UIViewController {
         tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
         tapRecognizer.numberOfTapsRequired = 1
         tapRecognizer.numberOfTouchesRequired = 1
+
+        loginButton.setTitle("Logging In...", forState: UIControlState.Disabled)
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+
+        // When we wind up back at the login view (after logging out),
+        //  make sure the Parse location data listeners are reset
+        ParseClient.sharedInstance().removeLocationDataListeners()
 
         addKeyboardDismissRecognizer()
     }
@@ -41,6 +49,17 @@ class LoginViewController: UIViewController {
         super.viewWillDisappear(animated)
 
         removeKeyboardDismissRecognizer()
+    }
+
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        // Reset UI elements back to default state, so they
+        //  will appear in default state next time the user
+        //  sees the login page (after logging out)
+        textFieldEmail.text    = ""
+        textFieldPassword.text = ""
+        loginButton.enabled = true
     }
 
     func addKeyboardDismissRecognizer() {
@@ -100,6 +119,8 @@ class LoginViewController: UIViewController {
             return
         }
 
+        loginButton.enabled = false
+
         UdacityClient.sharedInstance().authenticateWithUsername(textFieldEmail.text, password: textFieldPassword.text) { (loginSuccess, errorString) in
 
             if loginSuccess {
@@ -115,6 +136,9 @@ class LoginViewController: UIViewController {
                 })
 
             } else {
+
+                self.loginButton.enabled = true
+
                 if let errorString = errorString {
                     self.displayErrorAlert(errorString)
                 } else {

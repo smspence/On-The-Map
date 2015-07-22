@@ -31,6 +31,10 @@ class ParseClient : NSObject {
         locationDataListeners.append(listener)
     }
 
+    func removeLocationDataListeners() {
+        locationDataListeners.removeAll(keepCapacity: false)
+    }
+
     func notifyLocationDataListeners() {
         for listener in locationDataListeners {
             listener.studentLocationDataUpdated()

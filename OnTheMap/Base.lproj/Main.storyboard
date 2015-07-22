@@ -217,6 +217,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="loginButton" destination="Xl4-kS-alb" id="Fm7-To-4JB"/>
                         <outlet property="signUpLink" destination="qBp-79-Foy" id="j9C-I3-hFT"/>
                         <outlet property="textFieldEmail" destination="5h9-0P-fde" id="zM5-gg-RKN"/>
                         <outlet property="textFieldPassword" destination="KM6-R8-MSN" id="MFE-Lb-gjT"/>
