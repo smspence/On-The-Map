@@ -14,6 +14,8 @@ extension UdacityClient {
         // MARK: URLs
         static let BaseURLSecure : String = "https://www.udacity.com/api/"
 
+        static let SignUpLink : String = "https://www.udacity.com/account/auth#!/signup"
+
     }
 
     // MARK: - Methods

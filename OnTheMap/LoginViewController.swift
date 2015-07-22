@@ -93,7 +93,7 @@ class LoginViewController: UIViewController {
 
         if sender.state == .Ended {
             let app = UIApplication.sharedApplication()
-            app.openURL(NSURL(string: "https://www.udacity.com/account/auth#!/signup")!)
+            app.openURL(NSURL(string: UdacityClient.Constants.SignUpLink)!)
         }
     }
 
