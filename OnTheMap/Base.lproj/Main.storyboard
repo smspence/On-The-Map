@@ -258,6 +258,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fRM-RS-j1U">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Lkk-WR-g8N" id="7V5-21-dSQ"/>
+                                </connections>
+                            </mapView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ew-ib-pB7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <constraints>
@@ -285,12 +291,6 @@
                                     </mask>
                                 </variation>
                             </navigationBar>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fRM-RS-j1U">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Lkk-WR-g8N" id="7V5-21-dSQ"/>
-                                </connections>
-                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -310,8 +310,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="5Ew-ib-pB7"/>
                                 <exclude reference="fRM-RS-j1U"/>
+                                <exclude reference="5Ew-ib-pB7"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="QWX-pj-T30"/>
@@ -329,8 +329,8 @@
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="5Ew-ib-pB7"/>
                                 <include reference="fRM-RS-j1U"/>
+                                <include reference="5Ew-ib-pB7"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="QWX-pj-T30"/>
