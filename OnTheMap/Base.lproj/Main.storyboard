@@ -347,7 +347,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" id="tfT-GR-YEA"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="MapTabBar" id="tfT-GR-YEA"/>
                     <connections>
                         <outlet property="mapView" destination="fRM-RS-j1U" id="Ybh-M3-m0a"/>
                         <outlet property="mapViewNavBar" destination="5Ew-ib-pB7" id="WVe-pY-8Bg"/>
@@ -792,7 +792,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="List" id="3BU-ZO-fol"/>
+                    <tabBarItem key="tabBarItem" title="List" image="ListTabBar" id="3BU-ZO-fol"/>
                     <connections>
                         <outlet property="locationTable" destination="7ew-B5-wu3" id="XTy-dy-M4k"/>
                         <outlet property="tableViewNavBar" destination="5me-BY-lxt" id="wdP-fB-qmy"/>
@@ -803,4 +803,8 @@
             <point key="canvasLocation" x="2433" y="885"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ListTabBar" width="25" height="25"/>
+        <image name="MapTabBar" width="25" height="25"/>
+    </resources>
 </document>
