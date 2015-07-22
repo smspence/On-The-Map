@@ -27,7 +27,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         var buttons = [UIBarButtonItem]()
 
         let refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: "refreshButtonTapped:")
-        let addLocationButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "addLocationButtonTapped:")
+        let addLocationButton = UIBarButtonItem(image: UIImage(named: "PinNavBar"), style: UIBarButtonItemStyle.Plain, target: self, action: "addLocationButtonTapped:")
 
         buttons.append(refreshButton)
         buttons.append(addLocationButton)
