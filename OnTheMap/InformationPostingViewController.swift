@@ -85,6 +85,14 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
 
         textField.resignFirstResponder()
 
+        // If user presses return, this will do the same as
+        //  pressing the button for the corresponding text field
+        if textField === locationTextField {
+            findOnMapButtonTapped(findOnMapButton)
+        } else if textField === urlTextField {
+            submitButtonTapped(submitButton)
+        }
+
         return true
     }
 
@@ -132,6 +140,8 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func submitButtonTapped(sender: AnyObject) {
+
+        self.endAllTextBoxEditing()
 
         if count(urlTextField.text) > 0 {
 
@@ -207,6 +217,8 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
     @IBAction func findOnMapButtonTapped(sender: AnyObject) {
 
         // TODO - implement progress indicator
+
+        self.endAllTextBoxEditing()
 
         if count(locationTextField.text) > 0 {
             handleAddressString(locationTextField.text)
