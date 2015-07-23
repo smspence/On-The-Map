@@ -102,9 +102,11 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
 
     func handleUrlSubmission(urlString: String) {
 
+        // Make sure URL has either "http://" or "https://" at the beginning,
+        //  so that it opens properly in the web browser
         var mutableUrlString = urlString.lowercaseString
-
         if (mutableUrlString.rangeOfString("http://") == nil) && (mutableUrlString.rangeOfString("https://") == nil) {
+            // It is missing, so add "http://" to the beginning
             mutableUrlString = "http://" + urlString
         }
 
