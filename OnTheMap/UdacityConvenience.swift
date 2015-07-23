@@ -13,6 +13,8 @@ extension UdacityClient {
 
     class func handleLogoutInViewController(viewController: UIViewController) {
 
+        WebHelper.showNetworkActivityIndicator()
+
         UdacityClient.sharedInstance().taskForDELETESessionMethod() { JSONResult, error in
 
             var success = false
@@ -39,6 +41,9 @@ extension UdacityClient {
             }
 
             dispatch_async(dispatch_get_main_queue()) {
+
+                WebHelper.hideNetworkActivityIndicator()
+
                 if success {
                     viewController.dismissViewControllerAnimated(true, completion: nil)
                 } else {
@@ -57,6 +62,8 @@ extension UdacityClient {
     */
     func authenticateWithUsername(username: String, password: String, completionHandler: (success: Bool, errorString: String?) -> Void) {
 
+        WebHelper.showNetworkActivityIndicator()
+
         self.getSessionIdWithUsername(username, password: password) { (sessionIdSuccess, sessionID, userID, errorString) in
 
             if sessionIdSuccess {
@@ -71,10 +78,12 @@ extension UdacityClient {
                         self.userFirstName = firstName
                         self.userLastName  = lastName
                         dispatch_async(dispatch_get_main_queue()) {
+                            WebHelper.hideNetworkActivityIndicator()
                             completionHandler(success: true, errorString: nil)
                         }
                     } else {
                         dispatch_async(dispatch_get_main_queue()) {
+                            WebHelper.hideNetworkActivityIndicator()
                             completionHandler(success: false, errorString: userDataErrorString)
                         }
                     }
@@ -82,6 +91,7 @@ extension UdacityClient {
 
             } else {
                 dispatch_async(dispatch_get_main_queue()) {
+                    WebHelper.hideNetworkActivityIndicator()
                     completionHandler(success: sessionIdSuccess, errorString: errorString)
                 }
             }

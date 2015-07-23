@@ -16,6 +16,8 @@ extension ParseClient {
         var studentInfoDictionary = studentInfomation.getDictionary()
         studentInfoDictionary[ParseClient.JSONKeys.UniqueKey] = uniqueKey
 
+        WebHelper.showNetworkActivityIndicator()
+
         taskForPOSTMethod(Methods.StudentLocation, parameters: [:], jsonBody: studentInfoDictionary) { (JSONResult, error) in
 
             var success = false
@@ -43,6 +45,7 @@ extension ParseClient {
 
             // call completion handler on the main thread
             dispatch_async(dispatch_get_main_queue()) {
+                WebHelper.hideNetworkActivityIndicator()
                 completionHandler(success: success)
             }
         }
@@ -51,7 +54,11 @@ extension ParseClient {
 
     class func handleRefreshInViewController(viewController: UIViewController) {
 
+        WebHelper.showNetworkActivityIndicator()
+
         ParseClient.sharedInstance().getStudentLocations() { success in
+
+            WebHelper.hideNetworkActivityIndicator()
 
             if !success {
                 println("Get student locations failed")

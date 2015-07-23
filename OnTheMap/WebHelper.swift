@@ -41,6 +41,14 @@ class WebHelper : NSObject {
         return (!urlVars.isEmpty ? "?" : "") + join("&", urlVars)
     }
 
+    class func showNetworkActivityIndicator() {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+
+    class func hideNetworkActivityIndicator() {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+    }
+
     class func displayAlertMessage(message: String, viewController: UIViewController) {
         let controller = UIAlertController(title: nil, message: message, preferredStyle: UIAlertControllerStyle.Alert)
 

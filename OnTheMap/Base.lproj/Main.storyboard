@@ -535,19 +535,25 @@
                                                     <action selector="submitButtonTapped:" destination="Q4p-g8-9j6" eventType="touchUpInside" id="3Le-1K-Cc5"/>
                                                 </connections>
                                             </button>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="MNo-5b-tEw">
+                                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.87967974574942343" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="centerX" secondItem="12V-Rd-QYg" secondAttribute="centerX" constant="-0.5" id="Fnt-ja-xkI"/>
                                             <constraint firstAttribute="centerX" secondItem="dll-eD-eFF" secondAttribute="centerX" constant="-0.5" id="J2f-e5-dEP"/>
                                             <constraint firstAttribute="height" constant="44" id="MMa-4r-IoV"/>
+                                            <constraint firstItem="MNo-5b-tEw" firstAttribute="leading" secondItem="dll-eD-eFF" secondAttribute="trailing" constant="8" id="UrZ-ay-lcN"/>
                                             <constraint firstAttribute="centerY" secondItem="12V-Rd-QYg" secondAttribute="centerY" id="rp5-kb-Ncj"/>
+                                            <constraint firstAttribute="centerY" secondItem="MNo-5b-tEw" secondAttribute="centerY" id="wRR-si-z3W"/>
                                             <constraint firstAttribute="centerY" secondItem="dll-eD-eFF" secondAttribute="centerY" id="zkC-n5-fQt"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="subviews">
                                                 <exclude reference="dll-eD-eFF"/>
                                                 <exclude reference="12V-Rd-QYg"/>
+                                                <exclude reference="MNo-5b-tEw"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <exclude reference="MMa-4r-IoV"/>
@@ -555,12 +561,15 @@
                                                 <exclude reference="zkC-n5-fQt"/>
                                                 <exclude reference="Fnt-ja-xkI"/>
                                                 <exclude reference="rp5-kb-Ncj"/>
+                                                <exclude reference="UrZ-ay-lcN"/>
+                                                <exclude reference="wRR-si-z3W"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
                                             <mask key="subviews">
                                                 <include reference="dll-eD-eFF"/>
                                                 <include reference="12V-Rd-QYg"/>
+                                                <include reference="MNo-5b-tEw"/>
                                             </mask>
                                             <mask key="constraints">
                                                 <include reference="MMa-4r-IoV"/>
@@ -568,6 +577,8 @@
                                                 <include reference="zkC-n5-fQt"/>
                                                 <include reference="Fnt-ja-xkI"/>
                                                 <include reference="rp5-kb-Ncj"/>
+                                                <include reference="UrZ-ay-lcN"/>
+                                                <include reference="wRR-si-z3W"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -682,6 +693,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="MNo-5b-tEw" id="Nup-m2-sBV"/>
                         <outlet property="cancelButton" destination="uqN-ww-E4W" id="NFQ-X0-Oai"/>
                         <outlet property="findOnMapButton" destination="dll-eD-eFF" id="Xqy-pv-Gcf"/>
                         <outlet property="informationPostingNavBar" destination="2ex-ex-ZfQ" id="JOj-TY-eHt"/>

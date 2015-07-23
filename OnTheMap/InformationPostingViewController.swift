@@ -24,6 +24,8 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
     let geocoder = CLGeocoder()
 
     var locationString : String!
@@ -43,6 +45,8 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
         urlTextField.delegate      = self
 
         urlTextField.keyboardType = UIKeyboardType.URL
+
+        findOnMapButton.setTitle("Geocoding...", forState: UIControlState.Disabled)
 
         tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
         tapRecognizer.numberOfTapsRequired = 1
@@ -178,6 +182,9 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
 
     func handleAddressString(addressString: String) {
 
+        self.findOnMapButton.enabled = false
+        self.activityIndicator.startAnimating()
+
         geocoder.geocodeAddressString(addressString) { (placemarkArray: [AnyObject]!, error: NSError!) -> Void in
 
             var success = false
@@ -202,6 +209,8 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
 
                 self.enterMapView()
 
+                self.activityIndicator.stopAnimating()
+
                 success = true
 
             } else {
@@ -209,14 +218,14 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
             }
 
             if !success {
+                self.findOnMapButton.enabled = true
+                self.activityIndicator.stopAnimating()
                 WebHelper.displayAlertMessage("Error finding location.", viewController: self)
             }
         }
     }
 
     @IBAction func findOnMapButtonTapped(sender: AnyObject) {
-
-        // TODO - implement progress indicator
 
         self.endAllTextBoxEditing()
 
