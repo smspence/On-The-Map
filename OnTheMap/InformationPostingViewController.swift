@@ -197,14 +197,10 @@ class InformationPostingViewController: UIViewController, UITextFieldDelegate {
 
                 self.locationCoordinate = placemark.location.coordinate
 
-                if let locality = placemark.locality, let adminArea = placemark.administrativeArea {
-                    self.locationString = locality + ", " + adminArea
-                } else {
-                    self.locationString = placemark.name
-                }
+                self.locationString = self.locationTextField.text
 
                 println("finished with geocoder")
-                println("formatted location string = \(self.locationString)")
+                println("location string = \(self.locationString)")
                 println("lat/lon = (\(self.locationCoordinate.latitude), \(self.locationCoordinate.longitude))")
 
                 self.enterMapView()
